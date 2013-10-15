@@ -1,0 +1,21 @@
+<div metal:define-macro="newsletter_dynamic_content"
+     i18n:domain="plonegazette">
+
+ <tal:block tal:condition="objects">
+
+  <tal:objects tal:repeat="object objects">
+
+    <h2 tal:content="object/title_or_id" />
+
+    <p class="documentDescription"
+       tal:content="object/Description" />
+
+    <div class="documentImage" tal:condition="object/imagetag|nothing">
+        <img tal:replace="structure object/imagetag" />
+    </div>
+    
+  </tal:objects>
+
+ </tal:block>
+
+</div>

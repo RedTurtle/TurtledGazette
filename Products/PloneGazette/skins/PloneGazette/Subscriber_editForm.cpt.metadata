@@ -1,0 +1,11 @@
+[default]
+title=edit form
+
+[validators]
+validators=validate_subscriber_edit
+validators..Cancel=
+
+[actions]
+action.success=traverse_to:string:Subscriber_edit
+action.success..Cancel=redirect_to_action:string:view
+action.failure=traverse_to:string:Subscriber_editForm

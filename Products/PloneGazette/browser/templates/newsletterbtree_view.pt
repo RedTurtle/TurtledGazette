@@ -1,0 +1,34 @@
+<!--  newsletterbtree_view  
+     Created by  on 2007-11-25.
+-->
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xml:lang="en-US" lang="en-US"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      metal:use-macro="here/main_template/macros/master"
+      i18n:domain="plonegazette">
+
+    <body>
+        <div metal:fill-slot="main"
+             tal:define="subscriber_listing view/listSubscribers;
+                         Batch python:modules['Products.CMFPlone'].Batch;">
+
+          <h1 class="documentFirstHeading">
+            <span tal:content="context/Title" tal:omit-tag="">Directory Id</span>
+          </h1>
+
+          <a href=""
+             class="link-parent"
+             tal:define="parent_url view/parent_url"
+             tal:condition="parent_url"
+             tal:attributes="href string:${parent_url}"
+             i18n:domain="plone"
+             i18n:translate="go_to_parent_url">
+              Up one level
+          </a>
+
+           <div metal:use-macro="here/subscribers_infos/macros/subscriber_listing" />
+        </div>
+    </body>
+</html>

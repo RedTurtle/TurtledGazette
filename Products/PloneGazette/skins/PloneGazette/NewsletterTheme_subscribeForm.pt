@@ -1,0 +1,120 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html metal:use-macro="here/main_template/macros/master"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xml:lang="en-US"
+      lang="en-US">
+<body>
+
+<div metal:fill-slot="main"
+     i18n:domain="plonegazette"
+     tal:define="data python:here.subscribeFormProcess();
+                 errors python: data[1];
+                 data python: data[0];">
+
+
+ <h1 i18n:translate="heading_subscriber_edit">
+  Subscribe to this newsletter
+ </h1>
+
+ <p class="documentDescription"
+    tal:condition="here/description"
+    tal:content="here/description">
+  The short description of this newsletter
+ </p>
+
+ <!-- **********************
+      * If being submitted *
+      **********************
+ -->
+
+ <tal:alternative tal:condition="data/success|nothing">
+ <dl class="portalMessage">
+ 	<dt i18n:translate="subscribe_success_short_message">Subscription done</dt>
+    <dd i18n:translate="subscribe_success_message">
+       You will receive soon a mail that provides an URL for activating
+       your newly created account.
+    </dd>
+ </dl>
+ </tal:alternative>
+
+ <!-- ********************************
+      * If being "get" by navigation *
+      ********************************
+ -->
+
+ <tal:alternative tal:condition="not:exists: data/success">
+
+ <form action=""
+       method="post"
+       enctype="multipart/form-data"
+       tal:attributes="action request/URL">
+
+  <fieldset>
+  <legend i18n:translate="legend_subscriber_edit">Your subscription preferences</legend>
+
+  <!-- Email Field -->
+
+  <div class="field"
+       tal:attributes="class python:test(error_email, 'field error', 'field')"
+       tal:define="error_email errors/email | nothing">
+
+    <label i18n:translate="label_email" for="email">E-mail</label>
+
+    <span class="fieldRequired" title="Required"
+          i18n:attributes="title"
+          i18n:translate="label_required">(Required)</span> <br />
+
+    <div class="fieldErrorBox" tal:condition="error_email" tal:content="structure string:$error_email " />
+    <input type="text"
+           name="email"
+           id="email"
+           size="40"
+           value="#"
+           tal:attributes="value data/email|nothing;" />
+
+  </div>
+
+  <!-- HTML mode Field -->
+
+  <div class="field">
+
+    <label i18n:translate="label_format">Format</label>
+
+    <div i18n:translate="help_format"
+         class="formHelp">
+      Select here a format for newsletters.
+    </div>
+
+     <tal:block tal:repeat="available_format here/format_list">
+       <input type="radio" class="noborder"
+              name="format"
+              tal:define="format data/format|nothing"
+              tal:attributes="checked python:test(format == available_format or available_format==context.default_format, 1, 0);
+			                  id string:format_$available_format;
+                              value available_format;" />
+ 	   <label tal:content="available_format"
+	          tal:attributes="for string:format_$available_format"
+	          i18n:translate="" />
+     </tal:block>
+
+  </div>
+
+  <!-- Submitting machinery -->
+
+  <div class="formControls"
+       i18n:domain="plone">
+    <input class="context"
+           type="submit"
+           name="Change"
+           value="Save"
+           i18n:attributes="value" />
+  </div>
+
+ </fieldset>
+ </form>
+ </tal:alternative>
+</div>
+
+</body>
+</html>

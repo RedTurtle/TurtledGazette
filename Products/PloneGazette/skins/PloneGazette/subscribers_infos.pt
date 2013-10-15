@@ -1,0 +1,175 @@
+<html metal:use-macro="here/main_template/macros/master">
+<body>
+<div metal:fill-slot="main" i18n:domain="plonegazette">
+
+  <tal:block tal:condition="python:not user.has_permission('PNL Change Newsletter Theme', here)">
+    <tal:redirect tal:define="redirect python:request.RESPONSE.redirect(here.login_form.absolute_url())" />
+  </tal:block>
+
+  <tal:block tal:define="subscriber_all_stats here/subscriberStats;
+                         subscriber_stats python:subscriber_all_stats[0];
+                         subscriber_listing python:subscriber_all_stats[1];
+                         Batch python:modules['Products.CMFPlone'].Batch;
+                         b_start request/b_start | python:0;">
+
+  <p tal:condition="request/search_submitted | nothing">
+    <strong  i18n:translate="text_search_results">
+       Search results matching your criteria
+    </strong> 
+  </p>
+
+  <table class="listing">
+   <tr class="even">
+    <th i18n:translate="heading_subscribers">Subscribers</th>
+    <th i18n:translate="heading_html">HTML</th>
+    <th i18n:translate="heading_plaintext">Plain text</th>
+    <th i18n:translate="heading_total">Total</th>
+   </tr>
+   <tr class="odd">
+    <th i18n:translate="heading_active">Active</th>
+    <td tal:content="subscriber_stats/htmlactive">100</td>
+    <td tal:content="subscriber_stats/plaintextactive">100</td>
+    <td tal:content="subscriber_stats/totalactive">100</td>
+   </tr>
+   <tr class="even">
+    <th i18n:translate="heading_inactive">Inactive</th>
+    <td tal:content="subscriber_stats/htmlinactive">100</td>
+    <td tal:content="subscriber_stats/plaintextinactive">100</td>
+    <td tal:content="subscriber_stats/totalinactive">100</td>
+   </tr>
+   <tr class="odd">
+    <th i18n:translate="heading_total">Total</th>
+    <td tal:content="subscriber_stats/totalhtml">100</td>
+    <td tal:content="subscriber_stats/totalplaintext">100</td>
+    <td style="font-weight: bold" tal:content="subscriber_stats/total">100</td>
+   </tr>
+  </table>
+
+  <table class="listing" tal:define="stats here/extraRecipientStats">
+   <tr class="even">
+    <th i18n:translate="heading_extrarecipients">Extra recipients</th>
+    <th i18n:translate="heading_html">HTML</th>
+    <th i18n:translate="heading_plaintext">Plain text</th>
+   </tr>
+   <tr class="odd">
+    <td style="font-weight:bold" tal:content="stats/total">100</td>
+    <td tal:content="stats/html">50</td>
+    <td tal:content="stats/plaintext">50</td>
+   </tr>
+  </table>
+
+  <form id="subscriber-search"
+          name="subscriber-search"
+          action="#"
+          tal:attributes="action string:${here/absolute_url}/${template/id};"
+          method="get"
+          tal:define="format request/format | nothing;
+                      email request/email | nothing;
+                      active request/active | nothing">
+          <input type="hidden" name="search_submitted" value="1" />            
+    <fieldset>
+      <legend i18n:translate="legend_search_for_subscribers">Search for subscribers</legend>
+        <div class="field" id="field-activation-status" style="float:left;">
+          <label i18n:translate="label_activation_status">Activation status</label>
+          <div>
+            <input type="radio" name="active" value="1"
+                   id="active-yes" 
+                   tal:attributes="checked python:active=='1'" />
+            <label for="active-yes" i18n:translate="heading_active">Active</label>
+          </div>
+          <div>
+            <input type="radio" name="active" value="0"
+                   id="active-no" 
+                   tal:attributes="checked python:active=='0'" />
+            <label for="active-no" i18n:translate="heading_inactive">Inactive</label>
+          </div>
+          <div>
+            <input type="radio" name="active" value="-1"
+                   id="active-all"
+                   tal:attributes="checked python:active not in ('1','0')" />
+            <label for="active-all" i18n:translate="heading_all">All</label>
+          </div>
+        </div>
+        <div class="field" id="field-format" style="float:left;">
+            <label i18n:translate="label_format">Format</label>:
+            <div>
+              <input type="radio" name="format" value="HTML"
+                     id="format-html" 
+                     tal:attributes="checked python:format=='HTML'" />
+              <label for="format-html" i18n:translate="heading_html">HTML</label>
+            </div>
+            <div>
+              <input type="radio" name="format" value="Text"
+                     id="format-plain" 
+                     tal:attributes="checked python:format=='Text'" />
+              <label for="format-plain" i18n:translate="heading_plaintext">Plain text</label>
+            </div>
+            <div>
+              <input type="radio" name="format" value=""
+                     id="format-all"
+                     tal:attributes="checked python:format not in ('HTML','Text')" />
+              <label for="format-all" i18n:translate="heading_all">All</label>
+            </div>
+        </div>
+        <div class="visualClear"><!-- --></div>
+        <div class="field" id="field-email">
+            <label for="search-email" i18n:translate="label_email">E-mail</label>:
+            <input type="text" name="email" value=""
+                   id="search-email" 
+                   tal:attributes="value email" />
+            <div class="discreet" i18n:translate="help_enter_part_of_email">Enter part of email</div>
+        </div>
+        <div class="formControls">
+           <input type="submit" name="search" value="Search"
+                  i18n:domain="plone"
+                  class="searchButton"
+                  i18n:attributes="value label_search;" />
+                  
+        </div>
+    </fieldset>
+  </form>
+
+  <tal:block tal:condition="subscriber_listing" metal:define-macro="subscriber_listing">
+    <tal:block tal:define="b_start b_start | request/b_start | python:0;
+	                       b_size b_size | request/b_size | python:30;
+                           batch python:Batch(subscriber_listing, int(b_size), int(b_start), orphan=1)">
+
+      <div metal:use-macro="here/batch_macros/macros/navigation" />
+
+      <table class="listing">
+      <tr>
+        <th i18n:domain="plone" i18n:translate="label_email">E-mail</th>
+        <th i18n:translate="label_format">Format</th>
+        <th i18n:translate="label_active">Account activation</th>
+        <th i18n:translate="label_delete">Delete subscriber</th>
+      </tr>
+
+      <tal:loop tal:repeat="item batch">
+        <tr tal:define="oddrow repeat/item/odd;"
+            tal:attributes="class python:test(oddrow, 'even', 'odd')">
+          <td>
+            <a tal:attributes="href string:${item/url}/Subscriber_editForm"
+               tal:content="item/email">Link to subscriber object</a>
+          </td>
+          <td tal:content="item/format">Format</td>
+          <td>
+            <span tal:condition="item/active">*</span>
+          </td>
+          <td>
+            <a href="" tal:attributes="href string:${item/url}/unSubscribe?subscriber_id=${item/id}" i18n:translate="link_delete_subscriber">delete</a>
+          </td>
+        </tr>
+      </tal:loop>
+      </table>
+
+      <div metal:use-macro="here/batch_macros/macros/navigation" />
+
+     </tal:block>
+   </tal:block>
+
+   </tal:block>
+
+</div>
+
+</body>
+</html>

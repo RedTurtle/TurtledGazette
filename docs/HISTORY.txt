@@ -1,0 +1,7 @@
+HISTORY
+=======
+
+4.0 (unreleased)
+================
+
+Where branch started: PloneGazette 3.0.1

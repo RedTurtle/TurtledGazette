@@ -1,0 +1,26 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<tal:comment tal:replace="nothing">
+$Id: NewsletterTheme_unsubscribed.pt 20510 2004-08-19 10:00:55Z zope $
+</tal:comment>
+<html metal:use-macro="here/main_template/macros/master"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xml:lang="en-US"
+      lang="en-US">
+<body>
+
+<div metal:fill-slot="main"
+     i18n:domain="plonegazette"
+     tal:define="data python:here.subscribeFormProcess();
+                 errors python: data[1];
+                 data python: data[0];">
+
+ <dl class="portalMessage">
+  <dt i18n:domain="">Done</dt>
+  <dd i18n:translate="unsubscribe_success_message">You have been successfully unsubscribed from this newsletter.</dd>
+ </dl>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<tal:comment tal:replace="nothing">
+$Id: newsletter_mua_formatter.pt 251275 2012-10-18 14:23:24Z lucabel $
+
+Customizing this template
+=========================
+
+* CSS stylesheet: Embed the stylesheet in that template, don't refer to an external stylesheet.
+* Avoid javasripts: the various MUAs don't handle javascripts, most users disable javascripts for security issues.
+* Images and hyperlinks MUST have an absolute URL.
+* Customize tal code : don't forget to modify "Newsletter_view.pt" too.
+* Use of images in the template :
+{img src="#"
+     tal:condition="ishtml"
+     tal:replace="structure here/some_image_object" /}
+{whatever tal:condition="not: ishtml"}
+ An alternate text
+{/whatever}
+</tal:comment>
+
+<html i18n:domain="plonegazette"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xml:lang="en-US"
+      lang="en-US"
+      tal:define="ishtml options/html;
+                  force options/force;">
+ <style type="text/css">
+    <tal:comment tal:content="string:/*Insert your stylesheet here */" tal:condition="nothing"/>
+ </style>
+
+ <head>
+  <meta http-equiv="Content-Type"
+        content="text/html; charset=utf-8" />
+ </head>
+
+ <body tal:define="newsletter python:getattr(here, options['id']);
+                   objects newsletter/getObjects">
+
+  <h1 tal:content="options/title" />
+
+  <div tal:define="description options/description" style="font-weight : bold"
+       tal:condition="description"
+       tal:content="description" />
+
+  <div tal:replace="structure options/body">
+   The body...
+  </div>
+
+  <hr />
+  <div tal:replace="structure options/newsletterFooter" />
+ </body>
+</html>

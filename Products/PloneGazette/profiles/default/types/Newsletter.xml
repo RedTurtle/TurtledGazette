@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<object name="Newsletter" meta_type="Factory-based Type Information"
+   xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+   i18n:domain="plonegazette">
+ <property name="title" i18n:translate="">Newsletter</property>
+ <property
+    name="description" i18n:translate="">A newletter content, to be sent to subscribers</property>
+ <property name="content_icon">Newsletter.gif</property>
+ <property name="content_meta_type">Newsletter</property>
+ <property name="product">PloneGazette</property>
+ <property name="factory">addNewsletter</property>
+ <property name="immediate_view">folder_listing</property>
+ <property name="global_allow">False</property>
+ <property name="filter_content_types">True</property>
+ <property name="allowed_content_types" />
+ <property name="allow_discussion">False</property>
+ <alias from="(Default)" to="Newsletter_view"/>
+ <alias from="edit" to="Newsletter_editForm"/>
+ <alias from="properties" to="base_metadata"/>
+ <alias from="sharing" to="folder_localrole_form"/>
+ <alias from="view" to="Newsletter_view"/>
+ <action title="View" action_id="view" category="object" condition_expr=""
+    url_expr="string:${object_url}" visible="True">
+  <permission value="View"/>
+ </action>
+ <action title="Edit" action_id="edit" category="object" condition_expr=""
+    url_expr="string:${object_url}/edit" visible="True">
+  <permission value="PNL Change Newsletter"/>
+ </action>
+ <action title="Test" action_id="test" category="object" condition_expr=""
+    url_expr="string:${object_url}/Newsletter_testForm" visible="True"
+	i18n:domain="plone" i18n:attributes="title">
+  <permission value="PNL Change Newsletter"/>
+ </action>
+ <action title="Send" action_id="send" category="object" condition_expr=""
+    url_expr="string:${object_url}/Newsletter_sendForm" visible="True"
+	i18n:domain="plone" i18n:attributes="title">
+  <permission value="PNL Change Newsletter"/>
+ </action>
+</object>

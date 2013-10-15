@@ -1,0 +1,28 @@
+<tal:comment tal:replace="nothing">
+$Id: Subscriber_view.pt 111244 2010-02-18 08:48:22Z keul $
+</tal:comment>
+<html metal:use-macro="here/main_template/macros/master"
+      xmlns="http://www.w3.org/1999/xhtml" 
+      xml:lang="en-US"
+      lang="en-US">
+<body>
+
+<div metal:fill-slot="main"
+     i18n:domain="plonegazette" 
+     tal:define="active here/active">
+
+ <h1 i18n:translate="heading_your_account">
+  Your subscriber account for
+  <span i18n:name="title" tal:content="here/title_or_id">machin@truc.com</span>
+ </h1>
+
+ <ul>
+   <li tal:condition="active" i18n:translate="text_newsletter_activated">Your newsletter subscription is <b>activated</b>.</li>
+   <li tal:condition="not:active" i18n:translate="text_newsletter_not_activated">Your newsletter subscription is <b>not activated</b>.</li>
+   <li i18n:translate="text_newsletter_format">You will receive <strong i18n:name="format" tal:content="here/format" /> newsletters.</li>
+ </ul>
+
+</div>
+
+</body>
+</html>

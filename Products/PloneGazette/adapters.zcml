@@ -1,0 +1,22 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope">
+
+  <adapter
+      for="Products.PloneGazette.interfaces.INewsletterTheme"
+      factory=".adapters.NewsletterConversation"
+      provides="plone.app.discussion.interfaces.IConversation"
+      />
+
+  <adapter
+      for="Products.PloneGazette.interfaces.INewsletter"
+      factory=".adapters.NewsletterConversation"
+      provides="plone.app.discussion.interfaces.IConversation"
+      />
+
+  <adapter
+      for="Products.PloneGazette.interfaces.ISubscriber"
+      factory=".adapters.NewsletterConversation"
+      provides="plone.app.discussion.interfaces.IConversation"
+      />
+
+</configure>

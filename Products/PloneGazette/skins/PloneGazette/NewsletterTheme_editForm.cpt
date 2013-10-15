@@ -1,0 +1,464 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html metal:use-macro="here/main_template/macros/master"
+      i18n:domain="plonegazette">
+<body>
+
+<div metal:fill-slot="main"
+     tal:define="errors options/state/getErrors;
+                 member context/@@plone_portal_state/member;
+                 ">
+
+ <h1 i18n:translate="heading_newsletter_theme_edit">Edit newsletter theme</h1>
+
+ <form name="edit_form"
+       action=""
+       method="post"
+       enctype="multipart/form-data"
+       tal:define="visible_ids visible_ids|python: member.getProperty('visible_ids', None)"
+       tal:attributes="action current_page_url|string:${here/absolute_url}/${template/getId}">
+
+ <fieldset>
+
+ <legend i18n:translate="legend_newsletter_theme_details">Newsletter Theme details</legend>
+
+ <div class="field"
+      tal:define="error errors/id | nothing;
+                  id python:request.get('id', test(here.show_id(),here.getId(),''));"
+      tal:condition="visible_ids"
+      tal:attributes="class python:test(error, 'field error', 'field')">
+
+
+   <label for="id" i18n:translate="label_short_name" i18n:domain="plone">Short Name</label>
+
+   <div class="formHelp" i18n:domain="plone"
+        i18n:translate="help_shortname">
+       Short name is part of the item's web address. For accessibility reasons, do not use spaces, upper case, underscores, or special characters
+   </div>
+
+
+   <div tal:content="structure error">Validation error output</div>
+   <input type="text"
+          name="id"
+          id="id"
+          size="40"
+          value=""
+          tal:attributes="value id;"/>
+
+ </div>
+
+ <input type="hidden"
+        name="id"
+        tal:condition="not:visible_ids"
+        tal:attributes="value python:request.get('id', here.getId())" />
+
+ <!-- Title Field -->
+
+ <div class="field"
+      tal:define="error errors/title|nothing;
+                  Title request/title | here/Title;"
+      tal:attributes="class python:test(error, 'field error', 'field')">
+
+
+   <label for="title" i18n:translate="label_title">Title</label>
+
+   <span class="fieldRequired" title="Required"
+         i18n:attributes="title"
+         i18n:translate="label_required">(Required)</span>
+
+   <div tal:content="structure error">Validation error output</div>
+   <input type="text"
+          name="title"
+          id="title"
+          value=""
+          size="40"
+          tal:attributes="value Title;" />
+
+ </div>
+
+ <!-- Description Field -->
+
+ <div class="field"
+      i18n:domain="plone"
+      tal:define="description request/description | here/Description">
+
+   <label for="description" i18n:translate="label_description">Description</label>
+
+   <div i18n:translate="help_description"
+        class="formHelp">
+      A brief description of the item
+   </div>
+
+   <textarea cols="80"
+             rows="5"
+             name="description"
+             id="description"
+             tal:content="description">
+     Description
+   </textarea>
+
+ </div>
+
+  <div class="field"
+       i18n:domain="plone"
+       tal:define="text python:request.get('text', getattr(here, 'text', ''));
+                   cooked_text python:request.get('text', getattr(here, 'cooked_text' , ''))">
+
+    <label for="text" i18n:translate="label_theme_body_text">Theme introduction</label>
+
+    <tal:editor tal:define="inputname  string:text;
+                     formname   string:edit_form;
+                     inputvalue text;
+                     cooked_inputvalue cooked_text;">
+
+    <div metal:use-macro="here/wysiwyg_support/macros/wysiwygEditorBox">
+     The WYSIWYG code
+    </div>
+
+    </tal:editor>
+    <tal:bbb define="text_format text_format|string:html">
+      <div metal:use-macro="here/wysiwyg_support/macros/textFormatSelector">
+        Format box, if needed
+      </div>
+    </tal:bbb>
+
+  </div>
+
+ <!-- Default format Field -->
+
+ <div class="field">
+
+   <label i18n:translate="label_default_format">Default newsletter format</label>
+
+   <div i18n:translate="help_default_format"
+        class="formHelp">
+      Select the default format for the newsletters.
+   </div>
+
+  <div tal:define="default_format request/default_format | here/default_format">
+
+    <tal:block tal:repeat="format here/format_list">
+      <input type="radio"
+             name="default_format"
+             tal:attributes="value format;
+                             id format;
+                             checked python:test(default_format == format, 1, 0)" /><span tal:content="format" i18n:translate="" /><br />
+    </tal:block>
+
+  </div>
+ </div>
+
+ <!-- testEmail Field -->
+
+ <div class="field"
+      tal:define="error errors/testEmail|nothing;
+                  testEmail request/testEmail|here/testEmail;"
+      tal:attributes="class python:test(error, 'field error', 'field')">
+
+   <label i18n:translate="label_testEmail">Test email</label>
+
+   <span class="fieldRequired" title="Required"
+         i18n:attributes="title"
+         i18n:translate="label_required">(Required)</span>
+
+   <div i18n:translate="help_testEmail"
+        class="formHelp" >
+     Enter an email address. This address is the recipient for various tests and for various notifications.
+   </div>
+
+   <div tal:content="structure error">Validation error output</div>
+   <input type="text"
+          name="testEmail"
+          id="testEmail"
+          value=""
+          size="30"
+          tal:attributes="value testEmail;"/>
+
+ </div>
+
+ <!-- authorEmail Field -->
+
+ <div class="field"
+      tal:define="error errors/authorEmail|nothing;
+                  authorEmail request/authorEmail|here/authorEmail"
+      tal:attributes="class python:test(error, 'field error', 'field')">
+
+   <label i18n:translate="label_authorEmail">Newsletter author email</label>
+
+   <span class="fieldRequired" title="Required"
+         i18n:attributes="title"
+         i18n:translate="label_required">(Required)</span>
+
+   <div i18n:translate="help_authorEmail"
+        class="formHelp">
+     Enter an email address. This address will show as expeditor in the newsletters.<br />
+   </div>
+
+   <div tal:content="structure error">Validation error output</div>
+   <input type="text"
+          name="authorEmail"
+          id="authorEmail"
+          value=""
+          size="30"
+          tal:attributes="value authorEmail;"/>
+
+ </div>
+
+ <!-- Reply-To Field -->
+
+ <div class="field"
+      tal:define="error errors/replyto|nothing;
+                  replyto request/replyto|here/replyto|nothing"
+      tal:attributes="class python:test(error, 'field error', 'field')">
+
+   <label i18n:translate="label_replyto">Reply-To</label>
+
+   <div i18n:translate="help_replyto"
+        class="formHelp">
+     Enter an email address. It will be the "reply-to" header for the newsletter emails.
+   </div>
+
+   <div tal:content="structure error">Validation error output</div>
+   <input type="text"
+          name="replyto"
+          id="replyto"
+          value=""
+          size="30"
+          tal:attributes="value replyto;" />
+
+ </div>
+
+ <!-- activationMailSubject Field -->
+
+ <div class="field"
+      tal:define="error errors/activationMailSubject|nothing;
+                  activationMailSubject request/activationMailSubject|here/activationMailSubject;"
+      tal:attributes="class python:test(error, 'field error', 'field')">
+
+   <label i18n:translate="label_activationMailSubject">Subscriber activation mail subject</label>
+
+   <span class="fieldRequired" title="Required"
+         i18n:attributes="title"
+         i18n:translate="label_required">(Required)</span>
+
+   <div i18n:translate="help_activationMailSubject"
+        class="formHelp">
+     This text will show as subject of the activation mail sent after a new subscriber registers.<br />
+   </div>
+
+   <div tal:content="structure error">Validation error output</div>
+   <input type="text"
+          name="activationMailSubject"
+          id="activationMailSubject"
+          value=""
+          size="60"
+          tal:attributes="value activationMailSubject;" />
+
+ </div>
+
+ <!-- activationMailTemplate Field -->
+
+ <div class="field"
+      tal:define="error errors/activationMailTemplate|nothing;
+                  activationMailTemplate request/activationMailTemplate | here/activationMailTemplate"
+      tal:attributes="class python:test(error, 'field error', 'field')">
+
+   <label i18n:translate="label_activationMailTemplate">Subscriber activation mail template</label>
+
+   <span class="fieldRequired" title="Required"
+         i18n:attributes="title"
+         i18n:translate="label_required">(Required)</span>
+
+   <div i18n:translate="help_activationMailTemplate"
+        class="formHelp">
+    Enter the plain text model (template) of the mail sent to a new subscriber.<br />
+    Note : this text <b>must</b> include <b>%(url)s</b> and <b>%(email)s</b>
+    that will be respectively replaced in the real mail body by the subscriber
+    preferences URL and his e-mail address.
+   </div>
+
+   <div tal:content="structure error">Validation error output</div>
+   <textarea cols="80"
+             rows="5"
+             id="activationMailTemplate"
+             name="activationMailTemplate"
+             tal:content="activationMailTemplate">
+     Description
+   </textarea>
+
+ </div>
+
+  <div class="field"
+      tal:define="error errors/newsletterFooter|nothing;
+                  newsletterFooter request/newsletterFooter | here/newsletterFooter"
+      tal:attributes="class python:test(error, 'field error', 'field')">
+
+   <label i18n:translate="label_newsletterFooter">Newsletter footer text</label>
+
+   <div i18n:translate="help_newsletterFooter"
+        class="formHelp">
+    Enter the plain text model (template) of the footer of newsletters.<br />
+    Note : if you insert <b>%(url)s</b> inside the text, it will add a link to subscriber preferences.
+   </div>
+
+   <div tal:content="structure error">Validation error output</div>
+   <textarea cols="80"
+             rows="5"
+             id="newsletterFooter"
+             name="newsletterFooter"
+             tal:content="newsletterFooter">
+     Description
+   </textarea>
+
+ </div>
+
+ <!-- Notification pref. Field -->
+
+ <div class="field"
+      tal:define="notify request/notify | here/notify">
+
+   <label i18n:translate="label_notify">Notify new subscriber to test email (above)</label>
+   <div i18n:translate="help_notify"
+        class="formHelp">
+     Check this box if you want to receive mail notifications to the test email address above.
+   </div>
+
+   <input type="checkbox"
+          checked=""
+          name="notify"
+          tal:attributes="checked python: test(notify, default, nothing);" />
+
+ </div>
+
+ <!-- renderTemplate Field -->
+
+ <div class="field"
+      tal:define="error errors/renderTemplate|nothing;
+                  renderTemplate request/renderTemplate|here/renderTemplate"
+      tal:attributes="class python:test(error, 'field error', 'field')">
+
+   <label i18n:translate="label_renderTemplate">Newsletter render template (TALES)</label>
+
+   <div i18n:translate="help_renderTemplate"
+        class="formHelp">
+     Enter a TALES expression that finds the template that renders your newsletters.<br />
+     If you don't know what's a TALES expression or a template, leave this field blank,
+     a default template named "newsletter_render" does that job correctly.<br />
+     In that TALES expression, "here" is this object.<br />
+     <b>Warning: use a "nocall" expression like "nocall:here/myTemplate"</b>
+   </div>
+
+   <div tal:content="structure error">Validation error output</div>
+   <input type="text"
+          name="renderTemplate"
+          value=""
+          size="60"
+          tal:attributes="value renderTemplate;" />
+
+ </div>
+
+ <!-- alternative_portal_url Field -->
+
+ <div class="field"
+      tal:define="error errors/alternative_portal_url|nothing;
+                  alternative_portal_url request/alternative_portal_url|here/alternative_portal_url"
+      tal:attributes="class python:test(error, 'field error', 'field')">
+
+   <label i18n:translate="label_portal_url">Newsletter base URL</label>
+
+   <div i18n:translate="help_portal_url"
+        class="formHelp">
+       Normally, when sending the newsletter, links and images get correct URLs
+       pointing back to the server. However, in specialised setups where 
+       authenticated users use a different URL, the newsletter needs to use a
+       different URL. For example, editors would use a https URL, but 
+       newsletter subscribers would need to go to the http (no s) version
+       instead. Fill in the URL of the root of the portal here, or leave
+       blank to use the default.
+   </div>
+
+   <div tal:content="structure error">Validation error output</div>
+   <input type="text"
+          name="alternative_portal_url:omit_empty"
+          value=""
+          size="60"
+          tal:attributes="value alternative_portal_url;" />
+
+ </div>
+
+ <!-- extraRecipients Field -->
+
+ <div class="field"
+      tal:define="error errors/extraRecipients|nothing;
+                  extraRecipients request/extraRecipients|here/extraRecipients;"
+      tal:attributes="class python:test(error, 'field error', 'field')">
+
+   <label i18n:translate="label_extraRecipients">Extra recipients (TALES)</label>
+   <div i18n:translate="help_extraRecipients"
+        class="formHelp">
+     Enter a TALES expression that finds additional recipients to your newsletter.<br />
+     If you don't know what's a TALES expression or a template, leave this field blank.<br />
+     The value returned by this expression must be in the (Python) form of a list
+     of <b>(email, html, editurl)</b> tuples. <b>html</b> may be 1 or 0 (plain text in that case).
+     <b>editurl</b> is an URL where the recipient may change its preferences.<br />
+     In that TALES expression, "here" is this object.<br />
+     <b>Warning: use a "nocall" expression like "nocall:here/myTemplate"</b>
+   </div>
+
+   <div tal:content="structure error">Validation error output</div>
+   <input type="text"
+          name="extraRecipients"
+          value=""
+          size="60"
+          tal:attributes="value extraRecipients;" />
+
+ </div>
+
+ <div class="field"
+      tal:define="error errors/subscriber_folder_id|nothing;
+                  subscriber_folder_id request/subscriber_folder_id|here/subscriber_folder_id | nothing"
+      tal:attributes="class python:test(error, 'field error', 'field')">
+
+   <label i18n:translate="label_subscriber_folder_id">Subscriber folder id</label>
+   <div i18n:translate="help_subscriber_folder_id"
+        class="formHelp">
+    You can store all subscribers inside a "Large Plone Folder". First, create the folder inside your NewsletterTheme. Second, give here the folder id.
+    All the subscribers will be create inside this new folder.
+   </div>
+
+   <div tal:content="structure error">Validation error output</div>
+   <input type="text"
+          name="subscriber_folder_id"
+          value="#"
+          size="60"
+          tal:attributes="value subscriber_folder_id;" />
+
+ </div>
+
+ <!-- Submitting machinery -->
+
+ <div class="formControls"
+      i18n:domain="plone"
+      tal:define="process_creation request/process_creation|nothing;">
+  <input class="context"
+         type="submit"
+         name="form.button.Save"
+         value="Save"
+         i18n:attributes="value" />
+
+  <input class="standalone"
+         type="submit"
+         name="form.button.Cancel"
+         value="Cancel"
+         i18n:attributes="value" />
+ </div>
+
+ <input type="hidden" name="form.submitted" value="1" />
+
+ </fieldset>
+ </form>
+
+</div>
+
+</body>
+</html>

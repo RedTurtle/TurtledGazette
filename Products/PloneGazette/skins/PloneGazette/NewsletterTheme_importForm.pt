@@ -1,0 +1,59 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html metal:use-macro="here/main_template/macros/master"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xml:lang="en-US"
+      lang="en-US">
+<body>
+
+<div metal:fill-slot="main"
+     i18n:domain="plonegazette"
+     tal:define="logs here/getCSVImportLogs|nothing;
+                 came_from_import request/import | nothing">
+
+  <h1 i18n:translate="heading_import_subscribers">Import subscribers</h1>
+
+  <p i18n:translate="text_import_subscribers">You can here import subscribers from a csv file. This file must have headers. All headers are required and must be in this order "email / active / format". :</p>
+
+  <ul>
+    <li i18n:translate="text_import_email">"email" : email of the subscriber;</li>
+    <li i18n:translate="text_import_active">"active" : leave this field blank to create unactivate subscribers.</li>
+    <li i18n:translate="text_import_format">"format" : "HTML" or "Text". if blank, PloneGazette will use the default format.</li>
+  </ul>
+
+  <p i18n:translate="text_import_description">To import subscribers, upload the csv file via the form below and valid. All subcribers will be created inside a "Large Plone Folder" (the one defined inside the NewsletterTheme, or create it if not exist). A report will give you the final result.</p>
+
+  <form action="NewsletterTheme_import" method="post" enctype="multipart/form-data">
+
+    <fieldset>
+    <legend i18n:translate="legend_import_csv">Import csv file</legend>
+
+    <div class="row">
+      <label><strong i18n:translate="label_upload_file">Upload a file</strong></label>
+
+      <div class="formHelp" i18n:translate="text_upload_file">
+        Upload here a csv file to create subscribers.
+      </div>
+
+      <input type="file" name="file_upload" />
+
+    </div>
+
+    <div class="formControls">
+      <input type="submit" value="Import" i18n:attributes="value;" />
+    </div>
+    </fieldset>
+  </form>
+
+  <tal:block tal:condition="python:logs and came_from_import">
+    <h1 i18n:translate="heading_import_result">Import Result</h1>
+
+    <span tal:replace="structure logs" />
+
+  </tal:block>
+
+</div>
+
+</body>
+</html>

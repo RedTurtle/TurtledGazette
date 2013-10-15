@@ -1,0 +1,65 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html metal:use-macro="here/main_template/macros/master"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xml:lang="en-US"
+      lang="en-US">
+
+<body>
+
+<div metal:fill-slot="main"
+     tal:define="toLocalizedTime nocall:context/@@plone/toLocalizedTime;"
+     i18n:domain="plonegazette">
+
+ <h1 i18n:translate="heading_send_newsletter">
+  Send newsletter
+ </h1>
+
+  <dl class="portalMessage warning"
+      tal:condition="here/dateEmitted">
+  	<dt i18n:domain="plone" i18n:translate="">Warning</dt>
+	<dd i18n:translate="text_hasbeensend">
+    This newsletter has been sent on <span i18n:name="date" tal:replace="python:toLocalizedTime(context.dateEmitted, long_format=1)">Date</span>.
+	</dd>
+  </dl>
+
+  <p tal:define="stats python:here.getTheme().subscriberStats()[0]">
+   <span tal:omit-tag="" i18n:translate="text_send_to_recipients">You're about to send this newsletter to <span i18n:name="total" tal:replace="stats/totalactive">120</span> subscriber(s).
+   <span tal:replace="stats/htmlactive" i18n:name="count_html">100</span> will receive it in HTML when 
+   <span tal:replace="stats/plaintextactive" i18n:name="count_plain">20</span> will receive it in plain text</span>.
+  </p>
+  <p tal:condition="python:here.getTheme().getExtraRecipients()"
+     tal:define="stats python:here.getTheme().extraRecipientStats()">
+   <span tal:omit-tag="" i18n:translate="text_send_extra">In addition, this newsletter will be sent to <span i18n:name="total" tal:replace="stats/total">100</span> extra recipient(s).
+   <span tal:replace="stats/html" i18n:name="count_html">100</span> will receive it in HTML when
+   <span tal:replace="stats/plaintext" i18n:name="count_plain">20</span> will receive it in plain text</span>
+  </p>
+  <form method="post" action="#"
+        tal:attributes="action string:${here/absolute_url}/sendToSubscribers">
+   <input class="context"
+          type="submit"
+          value="Send all subscribers"
+          i18n:attributes="value" />
+
+  </form>
+
+ <div tal:define="errors options/errors1|nothing"
+      tal:condition="errors">
+  <p i18n:translate="smtp_errors_subscribers">The SMTP reported errors when sending the newsletter to these subscribers</p>
+  <ul>
+   <li tal:repeat="item errors"
+       tal:content="item">machin@truc.com</li>
+  </ul>
+ </div>
+ <div tal:define="errors options/errors2|nothing"
+      tal:condition="errors">
+  <p i18n:translate="smtp_errors_extrarecipients">The SMTP reported errors when sending the newsletter to these extra recipients</p>
+  <ul>
+   <li tal:repeat="item errors"
+       tal:content="item">machin@truc.com</li>
+  </ul>
+ </div>
+</div>
+
+</body>
+</html>

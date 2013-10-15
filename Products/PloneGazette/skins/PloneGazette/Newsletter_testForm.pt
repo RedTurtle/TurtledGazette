@@ -1,0 +1,57 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html metal:use-macro="here/main_template/macros/master"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xml:lang="en-US"
+      lang="en-US">
+
+<body>
+
+<div metal:fill-slot="main"
+     i18n:domain="plonegazette">
+
+ <div tal:define="errors options/errors | nothing;
+                  sent   options/sent | nothing"
+      tal:condition="sent">
+    <div tal:condition="errors" class="portalMessage stop" i18n:translate="text_test_send_errors">
+        There were errors when sending newsletter. 
+        Error log contains additional informations. Please fix it before sending newsletter to the recipients.
+    </div>  
+    <div tal:condition="not:errors" class="portalMessage info" i18n:translate="text_test_send_ok">
+        Test newsletter has been sent.
+    </div> 
+ </div>
+
+ <h1 i18n:translate="heading_test_newsletter">
+  Test Newsletter
+ </h1>
+
+ <p>
+  <a href="#" target="_blank"
+     tal:attributes="href string:${here/absolute_url}/renderTextHTML?force:int=1&amp;footer_url=${here/absolute_url}/xxx">
+   <span tal:omit-tag="" i18n:translate="preview_html_link">
+    Click here to see the preview of the <b>HTML newsletter</b> (as displayed in a MUA) in a new window.
+   </span>
+  </a>
+ </p>
+
+ <p>
+  <a href="#" target="_blank"
+     tal:attributes="href string:${here/absolute_url}/renderTextPlain?force:int=1&amp;footer_url=${here/absolute_url}/xxx">
+   <span tal:omit-tag="" i18n:translate="preview_plaintext_link">
+    Click here to see the preview of the <b>plain text newsletter</b> (as displayed in a MUA) in a new window.
+   </span>
+  </a>
+ </p>
+
+ <p tal:define="testmail python:here.getTheme().testEmail">
+  <a href="#"
+     tal:attributes="href string:${here/absolute_url}/testSendToMe">
+   <span tal:omit-tag="" i18n:translate="test_send_newsletter_link">Click here to <b>send this newsletter</b> as plain text and HTML to</span>
+   <b tal:content="testmail">toto@tutu.com</b>
+  </a>
+ </p>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,14 @@
+<configure
+ xmlns="http://namespaces.zope.org/zope"
+ xmlns:browser="http://namespaces.zope.org/browser"
+ i18n_domain="plonegazette">
+
+  <browser:page
+      for="..interfaces.INewsletterBTree"
+      name="newsletterbtree_view"
+      template="templates/newsletterbtree_view.pt"
+      class=".newsletterbtree.NewsletterBTreeView"
+      allowed_interface=".interfaces.INewsletterBTreeView"
+      permission="zope2.View" />
+
+</configure>

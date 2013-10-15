@@ -1,0 +1,32 @@
+<configure
+   xmlns="http://namespaces.zope.org/zope"
+   xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
+   xmlns:five="http://namespaces.zope.org/five"
+   xmlns:i18n="http://namespaces.zope.org/i18n"
+   xmlns:browser="http://namespaces.zope.org/browser"
+   xmlns:zcml="http://namespaces.zope.org/zcml" 
+   i18n_domain="plonegazette">
+
+  <i18n:registerTranslations directory="locales" />
+  
+  <include package=".browser" />
+
+  <include zcml:condition="installed plone.app.discussion" file="adapters.zcml"/>
+
+  <class class="Products.PloneGazette.Newsletter.Newsletter">
+  	<implements interface=".interfaces.INewsletter" />
+  </class>
+  
+  <class class="Products.PloneGazette.Subscriber.Subscriber">
+  	<implements interface=".interfaces.ISubscriber" />
+  </class>
+  
+  <genericsetup:registerProfile
+      name="default"
+      title="PloneGazette (RedTurtle edition)"
+      directory="profiles/default"
+      description="A Newsletter product (alternate version)"
+      provides="Products.GenericSetup.interfaces.EXTENSION"
+      />
+
+</configure>
