@@ -4,4 +4,26 @@ HISTORY
 4.0 (unreleased)
 ================
 
-Where branch started: PloneGazette 3.0.1
+Where branch started (PloneGazette 3.0.1) plus:
+
+- Inserted a section call 'references' into the plain-text mail with the links contained into the e-mail
+- Added the ``activateAllSubscribers`` method to NLTheme objects
+- Disabled Newsletter sub-objects
+- Subscription to the theme now is in the theme view
+- Possibile to get infos (and send newsletter) to non-active members
+- Fixed newsletter action aliases
+- Newsletter is nomore a folderish type
+- Fixed theme action aliases
+- the testSendToMe now take a REQUEST parameter, for send to another email
+- manually created internal links are no more broken
+- added ``subscribers_status_csv`` method
+- the ``activateAllSubscribers`` not take a csv_string parameter, to activate only some
+- the newsletter theme now have a rich text field
+- can override "b_size" in subscribers_infos from request
+- now link check if *one* of the CSS classes is ``internal-link``
+  (not comparing with the whole ``class`` attribute)
+- use MailHost.send before trying to use MailHost.secureSend
+- Can now use an alternative mail host providing a new site property with id ``plonegazette_mailhost``
+  (can be used to use `MaildropHost`__)
+
+__ https://pypi.python.org/pypi/Products.MaildropHost
