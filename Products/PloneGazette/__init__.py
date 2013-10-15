@@ -22,13 +22,12 @@ DirectoryView.registerDirectory('skins/PloneGazette', product_globals)
 
 def initialize(context):
 
-    import NewsletterTheme, Newsletter, Subscriber, Section, NewsletterTopic, NewsletterBTree
+    import NewsletterTheme, Newsletter, Subscriber, NewsletterBTree
 
-    contentConstructors = (Newsletter.addNewsletter, Subscriber.addSubscriber, NewsletterTopic.addNewsletterTopic)
-    contentClasses = (Newsletter.Newsletter, Subscriber.Subscriber, NewsletterTopic.NewsletterTopic)
+    contentConstructors = (Newsletter.addNewsletter, Subscriber.addSubscriber)
+    contentClasses = (Newsletter.Newsletter, Subscriber.Subscriber)
     factoryTypes = (Newsletter.Newsletter.factory_type_information,
-                    Subscriber.Subscriber.factory_type_information,
-                    NewsletterTopic.NewsletterTopic.factory_type_information)
+                    Subscriber.Subscriber.factory_type_information)
 
     ContentInit(
         'Plone Gazette Newsletter Theme',
