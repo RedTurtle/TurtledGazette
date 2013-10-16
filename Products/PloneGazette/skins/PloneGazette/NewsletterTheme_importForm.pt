@@ -14,15 +14,19 @@
 
   <h1 i18n:translate="heading_import_subscribers">Import subscribers</h1>
 
-  <p i18n:translate="text_import_subscribers">You can here import subscribers from a csv file. This file must have headers. All headers are required and must be in this order "email / active / format". :</p>
+  <p i18n:translate="text_import_subscribers">You can here import subscribers from a CSV file. This file must have headers. All headers are REQUIRED and must be in this order "email / active / format":</p>
 
   <ul>
-    <li i18n:translate="text_import_email">"email" : email of the subscriber;</li>
-    <li i18n:translate="text_import_active">"active" : leave this field blank to create unactivate subscribers.</li>
-    <li i18n:translate="text_import_format">"format" : "HTML" or "Text". if blank, PloneGazette will use the default format.</li>
+    <li i18n:translate="text_import_email">"email" : email of the subscriber</li>
+    <li i18n:translate="text_import_active">"active" : put "1" for already active user. Put "0" or leave this field blank to create unactivate subscribers</li>
+    <li i18n:translate="text_import_format">"format" : "HTML" or "Text". if blank, PloneGazette will use the default format</li>
   </ul>
 
-  <p i18n:translate="text_import_description">To import subscribers, upload the csv file via the form below and valid. All subcribers will be created inside a "Large Plone Folder" (the one defined inside the NewsletterTheme, or create it if not exist). A report will give you the final result.</p>
+  <p i18n:translate="text_import_description">
+  	To import subscribers, upload the CSV file via the form below and valid.
+	All subcribers will be created inside a "Large Plone Folder" (the one defined inside the NewsletterTheme, or create it if not exist).
+	A report will give you the final result.
+  </p>
 
   <form action="NewsletterTheme_import" method="post" enctype="multipart/form-data">
 

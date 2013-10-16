@@ -172,22 +172,9 @@ class NewsletterTheme(SkinnedFolder.SkinnedFolder, DefaultDublinCoreImpl, PNLCon
         self.alternative_portal_url = None
         self.text_format=''
         self.text=''
-        
-        self.activationMailSubject = translate(_("Please activate your newsletter account"), self)
-        self.activationMailTemplate = translate(_('default_activation_mail_template',
-                                                  default=u"""Dear subscriber,
-
-We have received and recorded your newsletter subscription.
-You must now activate your account to receive our newsletters.
-To do this, just browse to this URL...
-%(url)s
-Then you'll receive our next newsletters at %(email)s
-
-PLEASE DON'T REPLY TO THIS MAIL"""), self)
-        self.newsletterFooter = translate(_('default_newsletter_footer',
-                                            default=u"""Thank you for subscribing to this newsletter.<br />
-You can <a href="%(url)s">change your preferences</a> at any time.
-"""), self)
+        self.activationMailSubject = ''
+        self.activationMailTemplate = ''
+        self.newsletterFooter = ''
 
     @property
     def _scatalog(self):
@@ -197,6 +184,21 @@ You can <a href="%(url)s">change your preferences</a> at any time.
     def _post_init(self):
         """Post-init method (that is, method that is called AFTER the class has been set into the ZODB)
         """
+        self.activationMailSubject = translate(_("Please activate your newsletter account"), self.REQUEST)
+        self.activationMailTemplate = translate(_('default_activation_mail_template',
+                                                  default=u"""Dear subscriber,
+
+We have received and recorded your newsletter subscription.
+You must now activate your account to receive our newsletters.
+To do this, just browse to this URL...
+%(url)s
+Then you'll receive our next newsletters at %(email)s
+
+PLEASE DON'T REPLY TO THIS MAIL"""), self.REQUEST)
+        self.newsletterFooter = translate(_('default_newsletter_footer',
+                                            default=u"""Thank you for subscribing to this newsletter.<br />
+You can <a href="%(url)s">change your preferences</a> at any time.
+"""), self.REQUEST)
 
         self.indexObject()
         self._initCatalog()
@@ -431,20 +433,20 @@ You can <a href="%(url)s">change your preferences</a> at any time.
             if not emailaddress:
                 errors['email'] = translate(_('input_required',
                                               default=u'Input is required but no input given'),
-                                            context=self.REQUEST)
+                                            context=REQUEST)
                 return data, errors
 
             if not checkMailAddress(self, emailaddress):
                 errors['email'] = translate(_('invalid_email_address',
                                               default=u'This is not a valid mail address'),
-                                            context=self.REQUEST)
+                                            context=REQUEST)
                 return data, errors
             format = REQUEST.form.get('format', self.default_format)
             data['format'] = format
             if self.alreadySubscriber(emailaddress):
                 errors['email'] = translate(_('already_subscribed',
-                                            default=u'There is already a subscriber with this address'),
-                                            context=self.REQUEST)
+                                              default=u'There is already a subscriber with this address'),
+                                            context=REQUEST)
             if not errors:
                 # Creating the new account
                 self._subscribersCount += 1
@@ -789,8 +791,8 @@ You can <a href="%(url)s">change your preferences</a> at any time.
         # remove headers
         first_row = reader.next()
         if first_row['email']!='email':
-            return "You must add headers to the csv file : email, active, format ('email' at least)"
-
+            return _('csv_headers_error',
+                     default=u"You must add headers to the csv file : email, active, format ('email' at least)")
 
         # for each row, create a subscriber object
         default_format = self.default_format
@@ -841,15 +843,13 @@ You can <a href="%(url)s">change your preferences</a> at any time.
 
         self._logCSVImportResult(not_valid, already_used)
 
-        msg = ''
-        if k:
-            msg += '%s subscribers created. ' % str(k)
-        if len(already_used):
-            msg += '%s users were already subscriber on this newsletter theme. ' % len(already_used)
-
-        if len(not_valid):
-            msg += '%s emails were not valid. ' % len(not_valid)
-
+        msg = _('csv_import_report',
+                default=u"""${count_created} subscribers created.
+${count_already_there} users were already subscriber on this newsletter theme.
+${count_not_valid} emails were not valid.""",
+                mapping={'count_created': k,
+                         'count_already_there': len(already_used),
+                         'count_not_valid': len(not_valid)})
         return msg
 
     security.declareProtected(ChangeNewsletterTheme, 'getCSVImportLogs')

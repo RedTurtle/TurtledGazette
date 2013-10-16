@@ -63,6 +63,7 @@
    <label for="title" i18n:translate="label_title">Title</label>
 
    <span class="fieldRequired" title="Required"
+         i18n:domain="plone"
          i18n:attributes="title"
          i18n:translate="label_required">(Required)</span>
 
@@ -100,7 +101,6 @@
  </div>
 
   <div class="field"
-       i18n:domain="plone"
        tal:define="text python:request.get('text', getattr(here, 'text', ''));
                    cooked_text python:request.get('text', getattr(here, 'cooked_text' , ''))">
 
@@ -132,7 +132,8 @@
 
    <div i18n:translate="help_default_format"
         class="formHelp">
-      Select the default format for the newsletters.
+      Select the default format for the newsletters. Users will see this default automatically selected
+      when subscribing.
    </div>
 
   <div tal:define="default_format request/default_format | here/default_format">
@@ -142,7 +143,10 @@
              name="default_format"
              tal:attributes="value format;
                              id format;
-                             checked python:test(default_format == format, 1, 0)" /><span tal:content="format" i18n:translate="" /><br />
+                             checked python:test(default_format == format, 1, 0)" />
+       <label for="" tal:content="format"
+              tal:attributes="for format"
+              i18n:translate="" /><br />
     </tal:block>
 
   </div>
@@ -158,6 +162,7 @@
    <label i18n:translate="label_testEmail">Test email</label>
 
    <span class="fieldRequired" title="Required"
+         i18n:domain="plone"
          i18n:attributes="title"
          i18n:translate="label_required">(Required)</span>
 
@@ -186,6 +191,7 @@
    <label i18n:translate="label_authorEmail">Newsletter author email</label>
 
    <span class="fieldRequired" title="Required"
+         i18n:domain="plone"
          i18n:attributes="title"
          i18n:translate="label_required">(Required)</span>
 
@@ -238,6 +244,7 @@
    <label i18n:translate="label_activationMailSubject">Subscriber activation mail subject</label>
 
    <span class="fieldRequired" title="Required"
+         i18n:domain="plone"
          i18n:attributes="title"
          i18n:translate="label_required">(Required)</span>
 
@@ -266,6 +273,7 @@
    <label i18n:translate="label_activationMailTemplate">Subscriber activation mail template</label>
 
    <span class="fieldRequired" title="Required"
+         i18n:domain="plone"
          i18n:attributes="title"
          i18n:translate="label_required">(Required)</span>
 

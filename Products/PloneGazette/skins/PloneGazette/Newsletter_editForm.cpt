@@ -66,6 +66,7 @@
     <label i18n:translate="label_newsletter_title" for="title">Title</label>
 
     <span class="fieldRequired" title="Required"
+          i18n:domain="plone"
           i18n:attributes="title"
           i18n:translate="label_required">(Required)</span>
 

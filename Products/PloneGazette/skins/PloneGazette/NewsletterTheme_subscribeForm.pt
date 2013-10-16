@@ -62,6 +62,7 @@
     <label i18n:translate="label_email" for="email">E-mail</label>
 
     <span class="fieldRequired" title="Required"
+          i18n:domain="plone"
           i18n:attributes="title"
           i18n:translate="label_required">(Required)</span> <br />
 

@@ -3,7 +3,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2013-10-15 15:09+0000\n"
+"POT-Creation-Date: 2013-10-16 08:36+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: Luca Fabbri <keul@redturtle.it>\n"
 "Language-Team: RedTurtle Technology <sviluppoplone@redturtle.it>\n"
@@ -35,7 +35,7 @@ msgstr "Un iscritto alla newsletter"
 msgid "Folder for storing subscribers"
 msgstr ""
 
-#: ./skins/PloneGazette/NewsletterTheme_importForm.pt:44
+#: ./skins/PloneGazette/NewsletterTheme_importForm.pt:48
 msgid "Import"
 msgstr "Importa"
 
@@ -53,17 +53,10 @@ msgstr "Le modifiche alla Newsletter sono state salvate."
 
 #: ./NewsletterTheme.py:176
 msgid "Please activate your newsletter account"
-msgstr ""
+msgstr "Prego attiva la tua iscrizione alla newsletter"
 
 msgid "PloneGazette (RedTurtle edition)"
 msgstr "PloneGazette (versione RedTurtle)"
-
-#. Default: "Required"
-#: ./skins/PloneGazette/NewsletterTheme_editForm.cpt:65
-#: ./skins/PloneGazette/NewsletterTheme_subscribeForm.pt:64
-#: ./skins/PloneGazette/Newsletter_editForm.cpt:68
-msgid "Required"
-msgstr ""
 
 #: ./Newsletter.py:589
 msgid "SENDING TO NOT ACTIVE USERS."
@@ -71,7 +64,7 @@ msgstr ""
 
 #: ./Newsletter.py:598
 msgid "SMTP server related errors"
-msgstr ""
+msgstr "Errori legati al server SMTP"
 
 #. Default: "Send all subscribers"
 #: ./skins/PloneGazette/Newsletter_sendForm.pt:39
@@ -97,9 +90,9 @@ msgstr "Contenitore degli iscritti"
 
 #: ./skins/PloneGazette/NewsletterTheme_view.pt:18
 msgid "Subscription activated"
-msgstr ""
+msgstr "Iscrizione attivata"
 
-#: ./NewsletterTheme.py:573
+#: ./NewsletterTheme.py:574
 msgid "TALES compilation error: ${error}"
 msgstr ""
 
@@ -113,20 +106,41 @@ msgid "Unsubscribe"
 msgstr "Cancella iscrizione"
 
 #. Default: "There is already a subscriber with this address"
-#: ./NewsletterTheme.py:443
+#: ./NewsletterTheme.py:445
 #: ./skins/PloneGazette/validate_subscriber_edit.vpy:26
 msgid "already_subscribed"
+msgstr ""
+
+#. Default: "You must add headers to the csv file : email, active, format ('email' at least)"
+#: ./NewsletterTheme.py:792
+msgid "csv_headers_error"
+msgstr ""
+
+#. Default: "${count_created} subscribers created.\n${count_already_there} users were already subscriber on this newsletter theme.\n${count_not_valid} emails were not valid."
+#: ./NewsletterTheme.py:844
+msgid "csv_import_report"
 msgstr ""
 
 #. Default: "Dear subscriber,\n\nWe have received and recorded your newsletter subscription.\nYou must now activate your account to receive our newsletters.\nTo do this, just browse to this URL...\n%(url)s\nThen you'll receive our next newsletters at %(email)s\n\nPLEASE DON'T REPLY TO THIS MAIL"
 #: ./NewsletterTheme.py:177
 msgid "default_activation_mail_template"
 msgstr ""
+"Gentile iscritto,\n"
+"\n"
+"Abbiamo ricevuto e memorizzato la tua iscrizione alla newsletter.\n"
+"Ora devi attivare la tua iscrizione per poter ricevere la nostra newsletter.\n"
+"Per fare questo, vai semplicemente a questo indirizzo...\n"
+"%(url)s\n"
+"A questo punto riceverai le nostre prossime newsletter all'indirizzo %(email)s\n"
+"\n"
+"PER FAVORE NON RISPONDERE A QUESTA E-MAIL"
 
 #. Default: "Thank you for subscribing to this newsletter.<br />\nYou can <a href=\"%(url)s\">change your preferences</a> at any time.\n"
 #: ./NewsletterTheme.py:187
 msgid "default_newsletter_footer"
 msgstr ""
+"Grazie per la tua iscrizione a questa newsletter.<br />\n"
+"Ora puoi <a href=\"%(url)s\">cambiare le tue preference</a> in qualunque momento."
 
 #. Default: "Active"
 #: ./skins/PloneGazette/subscribers_infos.pt:29
@@ -159,14 +173,14 @@ msgid "heading_html"
 msgstr "HTML"
 
 #. Default: "Import Result"
-#: ./skins/PloneGazette/NewsletterTheme_importForm.pt:51
+#: ./skins/PloneGazette/NewsletterTheme_importForm.pt:54
 msgid "heading_import_result"
-msgstr ""
+msgstr "Risultato dell'importazione"
 
 #. Default: "Import subscribers"
 #: ./skins/PloneGazette/NewsletterTheme_importForm.pt:15
 msgid "heading_import_subscribers"
-msgstr ""
+msgstr "Importazione iscritti"
 
 #. Default: "Inactive"
 #: ./skins/PloneGazette/subscribers_infos.pt:35
@@ -229,12 +243,12 @@ msgid "heading_your_account_title"
 msgstr ""
 
 #. Default: "This text will show as subject of the activation mail sent after a new subscriber registers.<br />"
-#: ./skins/PloneGazette/NewsletterTheme_editForm.cpt:244
+#: ./skins/PloneGazette/NewsletterTheme_editForm.cpt:251
 msgid "help_activationMailSubject"
 msgstr "Questo testo apparirà come titolo dell'email inviata dopo la registrazione di un nuovo iscritto."
 
 #. Default: "Enter the plain text model (template) of the mail sent to a new subscriber.<br /> Note : this text <b>must</b> include <b>%(url)s</b> and <b>%(email)s</b> that will be respectively replaced in the real mail body by the subscriber preferences URL and his e-mail address."
-#: ./skins/PloneGazette/NewsletterTheme_editForm.cpt:272
+#: ./skins/PloneGazette/NewsletterTheme_editForm.cpt:280
 msgid "help_activationMailTemplate"
 msgstr "Inserite il template dell'email in formato Testo inviata ai nuovi iscritti.<br /> Nota: questo testo <b>deve</b> includere <b>%(url)s</b> e <b>%(email)s</b> che saranno rispettivamente sostituiti dall'URL relativo alla preferenze dell'account e dall'indirizzo email del nuovo iscritto."
 
@@ -244,19 +258,21 @@ msgid "help_active"
 msgstr "Seleziona questa casella per ricevere la newsletter"
 
 #. Default: "Enter an email address. This address will show as expeditor in the newsletters.<br />"
-#: ./skins/PloneGazette/NewsletterTheme_editForm.cpt:192
+#: ./skins/PloneGazette/NewsletterTheme_editForm.cpt:198
 msgid "help_authorEmail"
 msgstr "Inserite un indirizzo email. Questo apparirà come il mittente della newsletter."
 
 #. Default: "The date this newsletter was sent. Can be changed manually. Normally filled automatically while sending."
-#: ./skins/PloneGazette/Newsletter_editForm.cpt:152
+#: ./skins/PloneGazette/Newsletter_editForm.cpt:153
 msgid "help_dateEmitted"
 msgstr "Data di emissione della newsletter. Può essere cambiata manualmente. Normalmente viene conpilata automaticamente all'invio."
 
-#. Default: "Select the default format for the newsletters."
+#. Default: "Select the default format for the newsletters. Users will see this default automatically selected when subscribing."
 #: ./skins/PloneGazette/NewsletterTheme_editForm.cpt:133
 msgid "help_default_format"
-msgstr "Seleziona il formato di default per la newsletter"
+msgstr ""
+"Seleziona il formato di default per la newsletter.\n"
+"Gli utenti vedranno questo valore predefinito già selezionato all'iscrizione."
 
 #. Default: "Enter part of email"
 #: ./skins/PloneGazette/subscribers_infos.pt:120
@@ -264,59 +280,59 @@ msgid "help_enter_part_of_email"
 msgstr ""
 
 #. Default: "Enter a TALES expression that finds additional recipients to your newsletter.<br /> If you don't know what's a TALES expression or a template, leave this field blank.<br /> The value returned by this expression must be in the (Python) form of a list of <b>(email, html, editurl)</b> tuples. <b>html</b> may be 1 or 0 (plain text in that case). <b>editurl</b> is an URL where the recipient may change its preferences.<br /> In that TALES expression, \"here\" is this object.<br /> <b>Warning: use a \"nocall\" expression like \"nocall:here/myTemplate\"</b>"
-#: ./skins/PloneGazette/NewsletterTheme_editForm.cpt:397
+#: ./skins/PloneGazette/NewsletterTheme_editForm.cpt:405
 msgid "help_extraRecipients"
-msgstr "Inserite un'espressione TALES che troverà destinatari supplementari per la vostra newsletter.<br /> Se ignorate il significato di espressione TALES o di template, lasciate questo campo vuoto.<br /> Il valore restituito da questa espressione dovrà essere sotto forma (python) di una lista (email, html, editurl) tuples. html potrà aver valore 1 o 0 (formato Testo in quest'ultimo caso). <b>editurl</b> è un url dove il destinatario potr� cambiare le proprie preferenze.<br /> In questa espressione TALES, \"here\" è questo oggetto. <br /><b>Attenzione : utilizzate un'espressione \"nocall\" come : \"nocall:here/myTemplate\"</b>"
+msgstr "Inserite un'espressione TALES che troverà destinatari supplementari per la vostra newsletter.<br /> Se ignorate il significato di espressione TALES o di template, lasciate questo campo vuoto.<br /> Il valore restituito da questa espressione dovrà essere sotto forma (python) di una lista (email, html, editurl) tuples. html potrà aver valore 1 o 0 (formato Testo in quest'ultimo caso). <b>editurl</b> è un url dove il destinatario potrà cambiare le proprie preferenze.<br /> In questa espressione TALES, \"here\" è questo oggetto. <br /><b>Attenzione : utilizzate un'espressione \"nocall\" come : \"nocall:here/myTemplate\"</b>"
 
 #. Default: "Select here a format for newsletters."
-#: ./skins/PloneGazette/NewsletterTheme_subscribeForm.pt:84
+#: ./skins/PloneGazette/NewsletterTheme_subscribeForm.pt:85
 #: ./skins/PloneGazette/NewsletterTheme_view.pt:77
 #: ./skins/PloneGazette/Subscriber_editForm.cpt:59
 msgid "help_format"
 msgstr "Selezionate il formato della newsletter"
 
 #. Default: "Enter the plain text model (template) of the footer of newsletters.<br /> Note : if you insert <b>%(url)s</b> inside the text, it will add a link to subscriber preferences."
-#: ./skins/PloneGazette/NewsletterTheme_editForm.cpt:298
+#: ./skins/PloneGazette/NewsletterTheme_editForm.cpt:306
 msgid "help_newsletterFooter"
 msgstr "Inserite il modello (template) di testo per il fondo pagina della newsletter. "
 
 #. Default: "This text will not be included in the newsletter sent to your subscribers. It will show in the search results as a short summary of your newsletter. Please enter plain text (<b>not</b> HTML)."
-#: ./skins/PloneGazette/Newsletter_editForm.cpt:93
+#: ./skins/PloneGazette/Newsletter_editForm.cpt:94
 msgid "help_newsletter_description"
 msgstr "Utilizzate solamente il formato Testo (<b>niente HTML</b>)"
 
 #. Default: "The title of a newsletter will show as the subject of the mail client of the recipients."
-#: ./skins/PloneGazette/Newsletter_editForm.cpt:72
+#: ./skins/PloneGazette/Newsletter_editForm.cpt:73
 msgid "help_newsletter_title"
 msgstr "Il titolo della newsletter diventerà il titolo dell'email spedita agli iscritti."
 
 #. Default: "Check this box if you want to receive mail notifications to the test email address above."
-#: ./skins/PloneGazette/NewsletterTheme_editForm.cpt:321
+#: ./skins/PloneGazette/NewsletterTheme_editForm.cpt:329
 msgid "help_notify"
 msgstr "Selezionate questa casella se volete ricevere le notifiche all'indirizzo di test."
 
 #. Default: "Normally, when sending the newsletter, links and images get correct URLs pointing back to the server. However, in specialised setups where authenticated users use a different URL, the newsletter needs to use a different URL. For example, editors would use a https URL, but newsletter subscribers would need to go to the http (no s) version instead. Fill in the URL of the root of the portal here, or leave blank to use the default."
-#: ./skins/PloneGazette/NewsletterTheme_editForm.cpt:369
+#: ./skins/PloneGazette/NewsletterTheme_editForm.cpt:377
 msgid "help_portal_url"
 msgstr ""
 
 #. Default: "Enter a TALES expression that finds the template that renders your newsletters.<br /> If you don't know what's a TALES expression or a template, leave this field blank, a default template named \"newsletter_render\" does that job correctly.<br /> In that TALES expression, \"here\" is this object.<br /> <b>Warning: use a \"nocall\" expression like \"nocall:here/myTemplate\"</b>"
-#: ./skins/PloneGazette/NewsletterTheme_editForm.cpt:342
+#: ./skins/PloneGazette/NewsletterTheme_editForm.cpt:350
 msgid "help_renderTemplate"
-msgstr "Inserite un'espressione TALES che troverà il template per generare le vostre newsletters.<br /> Se ignorate il significato di espressione TALES o di template, lasciate questo campo vuoto, un template chiamato \"newsletter_render\" far� il lavoro correttamente.<br /> In questa espressione TALES, \"here\" qui c'� un oggetto. <br /> <b>Attenzione : utilizzate un'espressione \"nocall\" come : \"nocall:here/myTemplate\"</b>"
+msgstr "Inserite un'espressione TALES che troverà il template per generare le vostre newsletters.<br /> Se ignorate il significato di espressione TALES o di template, lasciate questo campo vuoto, un template chiamato \"newsletter_render\" farà il lavoro correttamente.<br /> In questa espressione TALES, \"here\" qui c'è un oggetto. <br /> <b>Attenzione : utilizzate un'espressione \"nocall\" come : \"nocall:here/myTemplate\"</b>"
 
 #. Default: "Enter an email address. It will be the \"reply-to\" header for the newsletter emails."
-#: ./skins/PloneGazette/NewsletterTheme_editForm.cpt:216
+#: ./skins/PloneGazette/NewsletterTheme_editForm.cpt:222
 msgid "help_replyto"
 msgstr "Inserite un indirizzo email. Sarà il \"replica-a\" per le email della newsletter."
 
 #. Default: "You can store all subscribers inside a \"Large Plone Folder\". First, create the folder inside your NewsletterTheme. Second, give here the folder id. All the subscribers will be create inside this new folder."
-#: ./skins/PloneGazette/NewsletterTheme_editForm.cpt:423
+#: ./skins/PloneGazette/NewsletterTheme_editForm.cpt:431
 msgid "help_subscriber_folder_id"
 msgstr "Potete memorizzare tutti gli iscritti dentro un \"Newsletter Large Folder\", crea il folder dentro il tuo NewsletterTheme"
 
 #. Default: "Enter an email address. This address is the recipient for various tests and for various notifications."
-#: ./skins/PloneGazette/NewsletterTheme_editForm.cpt:164
+#: ./skins/PloneGazette/NewsletterTheme_editForm.cpt:169
 msgid "help_testEmail"
 msgstr "Inserite un indirizzo email. Questo indirizzo sarà utilizzato per le prove e le notifiche."
 
@@ -327,19 +343,19 @@ msgid "input_required"
 msgstr "L'informazione è richiesta ma non è stata fornita"
 
 #. Default: "This is not a valid mail address"
-#: ./NewsletterTheme.py:437
+#: ./NewsletterTheme.py:438
 #: ./skins/PloneGazette/validate_newslettertheme_edit.vpy:16
 #: ./skins/PloneGazette/validate_subscriber_edit.vpy:20
 msgid "invalid_email_address"
 msgstr "Non è un indirizzo email valido"
 
 #. Default: "Subscriber activation mail subject"
-#: ./skins/PloneGazette/NewsletterTheme_editForm.cpt:238
+#: ./skins/PloneGazette/NewsletterTheme_editForm.cpt:244
 msgid "label_activationMailSubject"
 msgstr "Titolo dell'email di attivazione"
 
 #. Default: "Subscriber activation mail template"
-#: ./skins/PloneGazette/NewsletterTheme_editForm.cpt:266
+#: ./skins/PloneGazette/NewsletterTheme_editForm.cpt:273
 msgid "label_activationMailTemplate"
 msgstr "Template del messaggio di attivazione"
 
@@ -355,12 +371,12 @@ msgid "label_active"
 msgstr "Attivazione account"
 
 #. Default: "Newsletter author email"
-#: ./skins/PloneGazette/NewsletterTheme_editForm.cpt:186
+#: ./skins/PloneGazette/NewsletterTheme_editForm.cpt:191
 msgid "label_authorEmail"
 msgstr "Indirizzo email dell'autore della newsletter"
 
 #. Default: "Newsletter content"
-#: ./skins/PloneGazette/Newsletter_editForm.cpt:115
+#: ./skins/PloneGazette/Newsletter_editForm.cpt:116
 msgid "label_body_text"
 msgstr "Contenuto della newsletter"
 
@@ -370,7 +386,7 @@ msgid "label_choose_newsletter"
 msgstr "Scegli una newsletter"
 
 #. Default: "Date emitted"
-#: ./skins/PloneGazette/Newsletter_editForm.cpt:151
+#: ./skins/PloneGazette/Newsletter_editForm.cpt:152
 msgid "label_dateEmitted"
 msgstr "Data di emissione"
 
@@ -392,24 +408,24 @@ msgid "label_email"
 msgstr "Email"
 
 #. Default: "Extra recipients (TALES)"
-#: ./skins/PloneGazette/NewsletterTheme_editForm.cpt:396
+#: ./skins/PloneGazette/NewsletterTheme_editForm.cpt:404
 msgid "label_extraRecipients"
 msgstr "Destinatari supplementari della newsletter (TALES)"
 
 #. Default: "Format"
-#: ./skins/PloneGazette/NewsletterTheme_subscribeForm.pt:82
+#: ./skins/PloneGazette/NewsletterTheme_subscribeForm.pt:83
 #: ./skins/PloneGazette/NewsletterTheme_view.pt:75
 #: ./skins/PloneGazette/Subscriber_editForm.cpt:57
 msgid "label_format"
 msgstr "Formato"
 
 #. Default: "Newsletter footer text"
-#: ./skins/PloneGazette/NewsletterTheme_editForm.cpt:296
+#: ./skins/PloneGazette/NewsletterTheme_editForm.cpt:304
 msgid "label_newsletterFooter"
 msgstr "Newsletter testo di fondo pagina"
 
 #. Default: "Description"
-#: ./skins/PloneGazette/Newsletter_editForm.cpt:91
+#: ./skins/PloneGazette/Newsletter_editForm.cpt:92
 msgid "label_newsletter_description"
 msgstr "Descrizione"
 
@@ -419,41 +435,39 @@ msgid "label_newsletter_title"
 msgstr "Titolo della newsletter"
 
 #. Default: "Notify new subscriber to test email (above)"
-#: ./skins/PloneGazette/NewsletterTheme_editForm.cpt:320
+#: ./skins/PloneGazette/NewsletterTheme_editForm.cpt:328
 msgid "label_notify"
 msgstr "Ricevere una notifica per ogni nuovo abbonato all'indirizzo email di test."
 
 #. Default: "Newsletter base URL"
-#: ./skins/PloneGazette/NewsletterTheme_editForm.cpt:367
+#: ./skins/PloneGazette/NewsletterTheme_editForm.cpt:375
 msgid "label_portal_url"
 msgstr "URL di base nella newsletter"
 
 #. Default: "Newsletter render template (TALES)"
-#: ./skins/PloneGazette/NewsletterTheme_editForm.cpt:340
+#: ./skins/PloneGazette/NewsletterTheme_editForm.cpt:348
 msgid "label_renderTemplate"
 msgstr "Template della newsletter (TALES)."
 
 #. Default: "Reply-To"
-#: ./skins/PloneGazette/NewsletterTheme_editForm.cpt:214
+#: ./skins/PloneGazette/NewsletterTheme_editForm.cpt:220
 msgid "label_replyto"
 msgstr "Replica-a"
 
-#. Default: "(Required)"
-#: ./skins/PloneGazette/NewsletterTheme_editForm.cpt:65
-#: ./skins/PloneGazette/NewsletterTheme_subscribeForm.pt:64
-#: ./skins/PloneGazette/Newsletter_editForm.cpt:68
-msgid "label_required"
-msgstr "(Obbligatorio)"
-
 #. Default: "Subscriber folder id"
-#: ./skins/PloneGazette/NewsletterTheme_editForm.cpt:422
+#: ./skins/PloneGazette/NewsletterTheme_editForm.cpt:430
 msgid "label_subscriber_folder_id"
 msgstr "Folder degli iscritti"
 
 #. Default: "Test email"
-#: ./skins/PloneGazette/NewsletterTheme_editForm.cpt:158
+#: ./skins/PloneGazette/NewsletterTheme_editForm.cpt:162
 msgid "label_testEmail"
 msgstr "Email di test"
+
+#. Default: "Theme introduction"
+#: ./skins/PloneGazette/NewsletterTheme_editForm.cpt:107
+msgid "label_theme_body_text"
+msgstr "Introduzione al tema dema della newsletter"
 
 #. Default: "Title"
 #: ./skins/PloneGazette/NewsletterTheme_editForm.cpt:63
@@ -461,7 +475,7 @@ msgid "label_title"
 msgstr "Titolo"
 
 #. Default: "Upload a file"
-#: ./skins/PloneGazette/NewsletterTheme_importForm.pt:33
+#: ./skins/PloneGazette/NewsletterTheme_importForm.pt:37
 msgid "label_upload_file"
 msgstr "Carica un file"
 
@@ -476,7 +490,7 @@ msgid "label_your_email"
 msgstr "Indirizzo email"
 
 #. Default: "Import csv file"
-#: ./skins/PloneGazette/NewsletterTheme_importForm.pt:30
+#: ./skins/PloneGazette/NewsletterTheme_importForm.pt:34
 msgid "legend_import_csv"
 msgstr "Importa file CSV"
 
@@ -590,27 +604,27 @@ msgstr "Clicca qui per <b>inviare questa newsletter</b> in formato Testo e HTML 
 msgid "text_hasbeensend"
 msgstr "Questa newsletter è stata inviata il ${date}."
 
-#. Default: "\"active\" : leave this field blank to create unactivate subscribers."
+#. Default: "\"active\" : put \"1\" for already active user. Put \"0\" or leave this field blank to create unactivate subscribers"
 #: ./skins/PloneGazette/NewsletterTheme_importForm.pt:21
 msgid "text_import_active"
 msgstr ""
 
-#. Default: "To import subscribers, upload the csv file via the form below and valid. All subcribers will be created inside a \"Large Plone Folder\" (the one defined inside the NewsletterTheme, or create it if not exist). A report will give you the final result."
+#. Default: "To import subscribers, upload the CSV file via the form below and valid. All subcribers will be created inside a \"Large Plone Folder\" (the one defined inside the NewsletterTheme, or create it if not exist). A report will give you the final result."
 #: ./skins/PloneGazette/NewsletterTheme_importForm.pt:25
 msgid "text_import_description"
 msgstr ""
 
-#. Default: "\"email\" : email of the subscriber;"
+#. Default: "\"email\" : email of the subscriber"
 #: ./skins/PloneGazette/NewsletterTheme_importForm.pt:20
 msgid "text_import_email"
 msgstr ""
 
-#. Default: "\"format\" : \"HTML\" or \"Text\". if blank, PloneGazette will use the default format."
+#. Default: "\"format\" : \"HTML\" or \"Text\". if blank, PloneGazette will use the default format"
 #: ./skins/PloneGazette/NewsletterTheme_importForm.pt:22
 msgid "text_import_format"
 msgstr ""
 
-#. Default: "You can here import subscribers from a csv file. This file must have headers. All headers are required and must be in this order \"email / active / format\". :"
+#. Default: "You can here import subscribers from a CSV file. This file must have headers. All headers are REQUIRED and must be in this order \"email / active / format\":"
 #: ./skins/PloneGazette/NewsletterTheme_importForm.pt:17
 msgid "text_import_subscribers"
 msgstr ""
@@ -666,7 +680,7 @@ msgid "text_test_send_ok"
 msgstr ""
 
 #. Default: "Upload here a csv file to create subscribers."
-#: ./skins/PloneGazette/NewsletterTheme_importForm.pt:35
+#: ./skins/PloneGazette/NewsletterTheme_importForm.pt:39
 msgid "text_upload_file"
 msgstr ""
 

@@ -13,7 +13,7 @@ redirect = request.RESPONSE.redirect
 plone_utils = context.plone_utils
 
 result = context.createSubscribersFromCSV(file_upload)
-plone_utils.addPortalMessage(msg, type="error")
+plone_utils.addPortalMessage(result, type='info')
 
 return redirect(context.absolute_url() + '/NewsletterTheme_importForm?import=1')
 
