@@ -28,7 +28,10 @@ setup(name='TurtledGazette',
       packages=find_packages(exclude=['ez_setup']),
       include_package_data = True,
       zip_safe=False,
-      install_requires=['setuptools'],
+      install_requires=[
+            'setuptools',
+            'elementtree',
+      ],
       namespace_packages=['Products'],
       entry_points="""
       [z3c.autoinclude.plugin]
