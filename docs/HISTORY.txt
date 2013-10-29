@@ -25,5 +25,7 @@ Where branch started (PloneGazette 3.0.1) plus:
 - use MailHost.send before trying to use MailHost.secureSend
 - Can now use an alternative mail host providing a new site property with id ``plonegazette_mailhost``
   (can be used to use `MaildropHost`__)
+- Removed unused dynamic content methods [cekk]
+- Fixed encoding error in newsletter indexer for descriptions [cekk]
 
 __ https://pypi.python.org/pypi/Products.MaildropHost

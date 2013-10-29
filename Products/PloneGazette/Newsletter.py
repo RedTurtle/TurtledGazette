@@ -588,7 +588,6 @@ class Newsletter(PortalContent, DefaultDublinCoreImpl, PNLContentBase):
         if not active:
             self.plone_utils.addPortalMessage(_(u'SENDING TO NOT ACTIVE USERS.'))
         # we are sending to all recipients. Render dynamic content and store it persistently
-        self._dynamic_content=self.render_dynamic_content(html=True)
         errors1 = self.sendToRecipients(recipients)
         recipients = theme.getExtraRecipients()
         errors2 = self.sendToRecipients(recipients)
@@ -615,13 +614,6 @@ class Newsletter(PortalContent, DefaultDublinCoreImpl, PNLContentBase):
         objects = [object for object in self.objectValues(('Section','NewsletterTopic', 'NewsletterReference', 'NewsletterRichReference')) if hasPermission('View', object)]
         objects.sort(lambda a,b:cmp(self.getObjectPosition(a.getId()), self.getObjectPosition(b.getId())))
         return objects
-
-    security.declareProtected(View, 'renderedDynamicContent')
-    def renderedDynamicContent(self, force=False):
-        if force:
-            return None
-        else:
-            return self._dynamic_content
 
     security.declareProtected(ListFolderContents, 'listFolderContents')
     def listFolderContents( self, spec=None, contentFilter=None, suppressHiddenFiles=0 ):

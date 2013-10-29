@@ -754,7 +754,7 @@ You can <a href="%(url)s">change your preferences</a> at any time.
 
     security.declarePublic('SearchableText')
     def SearchableText(self):
-        return self.title + self.description + self.text
+        return self.title + self.description.encode('utf-8') + self.text
 
     ##########################
     ## CSV import features

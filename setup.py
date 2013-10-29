@@ -31,6 +31,7 @@ setup(name='TurtledGazette',
       install_requires=[
             'setuptools',
             'elementtree',
+            'Products.PloneGazette',
       ],
       namespace_packages=['Products'],
       entry_points="""
