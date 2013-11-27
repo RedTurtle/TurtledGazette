@@ -52,6 +52,9 @@ except:
     HTML = False
 
 from Products.PloneGazette import PloneGazetteFactory as _
+from zope.component import getMultiAdapter
+import logging
+logger = logging.getLogger('PloneGazette')
 
 #################
 ## The factory ##
@@ -747,6 +750,26 @@ You can <a href="%(url)s">change your preferences</a> at any time.
             else:
                 stats['plaintext'] += 1
         return stats
+
+    def getTemplateStylesheet(self, css_name="base_newsletter_styles.css"):
+        """
+        Try to get a css file (in portal_skins), parse it, and return the styles to the template.
+        """
+        portal_state = getMultiAdapter((self, self.REQUEST), name=u'plone_portal_state')
+        portal = portal_state.portal()
+        portal_url = portal_state.portal_url()
+        try:
+            css = portal.unrestrictedTraverse("%s/%s" % (portal.getId(), css_name))
+        except KeyError:
+            logger.error("Newsletter Styles. CSS %s not found. Is it available in portal_skins?" % css_name)
+            return ""
+        try:
+            css_str = str(css)
+            #in the css we can use a dynamic variable for portal_url
+            return css_str.replace("${portal_url}", portal_url)
+        except:
+            logger.error("Invalid CSS file: %s. Cannot convert to string" % css_name)
+            return ""
 
     ############################
     ## portal_catalog support ##

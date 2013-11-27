@@ -451,7 +451,8 @@ class Newsletter(PortalContent, DefaultDublinCoreImpl, PNLContentBase):
                 text = lynx_file_url.sub('%(url)s', text)
         else:
             text = transform_tool.convertToData('text/plain', html)
-
+        #remove some garbage in the string
+        text =  text.lstrip(' \n')
         if REQUEST is not None:
             # called directly from the web; set content-type
             # The publisher will then re-encode for us
@@ -507,7 +508,6 @@ class Newsletter(PortalContent, DefaultDublinCoreImpl, PNLContentBase):
         email is the mail address
         format is 'HTML' to receive HTML/mixed mail
         editurl is the user preference URL"""
-
         htmlTpl = self.renderTextHTML(force=force)
         hasurl = '%(url)s' in htmlTpl
         plaintextTpl = self.renderTextPlain(force=force)

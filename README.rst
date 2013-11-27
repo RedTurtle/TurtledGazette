@@ -13,6 +13,22 @@ non-official set of changes.
 After a long long time the official development re-started, but our branch is **so** different that a
 merge was mostly impossible. But we like our changes!
 
+Template stylesheets
+====================
+
+You can add a custom stylesheets to your custom templates.
+To do this, you need to override **base_newsletter_styles.css** in portal_skins.
+
+In this css, you can use a variable called "``${portal_url}``" that will be replaced to actual portal_url.
+
+For example:    
+
+::
+
+    #container {
+        background: transparent url(${portal_url}/header.jpg) no-repeat center top;
+    }
+
 Please note
 ===========
 

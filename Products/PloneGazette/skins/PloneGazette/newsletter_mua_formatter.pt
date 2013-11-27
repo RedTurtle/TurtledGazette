@@ -2,7 +2,6 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 <tal:comment tal:replace="nothing">
-$Id: newsletter_mua_formatter.pt 251275 2012-10-18 14:23:24Z lucabel $
 
 Customizing this template
 =========================
@@ -26,9 +25,9 @@ Customizing this template
       lang="en-US"
       tal:define="ishtml options/html;
                   force options/force;">
- <style type="text/css">
-    <tal:comment tal:content="string:/*Insert your stylesheet here */" tal:condition="nothing"/>
- </style>
+
+ <style type="text/css" tal:condition="ishtml"
+        tal:content="here/getTemplateStylesheet" />
 
  <head>
   <meta http-equiv="Content-Type"

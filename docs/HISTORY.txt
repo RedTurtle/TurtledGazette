@@ -27,5 +27,7 @@ Where branch started (PloneGazette 3.0.1) plus:
   (can be used to use `MaildropHost`__)
 - Removed unused dynamic content methods [cekk]
 - Fixed encoding error in newsletter indexer for descriptions [cekk]
+- Fixed renderTextPlain to remove some garbage to converted strings [cekk]
+- Added external css support for newsletter templates [cekk]
 
 __ https://pypi.python.org/pypi/Products.MaildropHost
