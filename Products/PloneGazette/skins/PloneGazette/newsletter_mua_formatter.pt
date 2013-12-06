@@ -26,12 +26,13 @@ Customizing this template
       tal:define="ishtml options/html;
                   force options/force;">
 
- <style type="text/css" tal:condition="ishtml"
-        tal:content="here/getTemplateStylesheet" />
-
  <head>
   <meta http-equiv="Content-Type"
         content="text/html; charset=utf-8" />
+
+ <style type="text/css" tal:condition="ishtml"
+        tal:content="here/getTemplateStylesheet" />
+
  </head>
 
  <body tal:define="newsletter python:getattr(here, options['id']);
