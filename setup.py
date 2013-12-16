@@ -1,10 +1,9 @@
 from setuptools import setup, find_packages
 import os
 
-version = os.path.join('Products', 'PloneGazette', 'version.txt')
 
 setup(name='TurtledGazette',
-      version=version,
+      version="4.0.0",
       description='A complete Newsletter product for Plone (an alternate version of Products.PloneGazette)',
       long_description=open("README.rst").read() + "\n" +
                        open(os.path.join("docs", "HISTORY.txt")).read(),
@@ -15,7 +14,6 @@ setup(name='TurtledGazette',
       classifiers=[
             'Programming Language :: Python',
             'Framework :: Plone',
-            'Framework :: Plone :: 3.2',
             'Framework :: Plone :: 3.3',
             'Framework :: Plone :: 4.0',
             'Framework :: Plone :: 4.1',
