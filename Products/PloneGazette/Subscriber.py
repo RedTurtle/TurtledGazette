@@ -118,13 +118,13 @@ class Subscriber(PortalContent, DefaultDublinCoreImpl, PNLContentBase):
     # Edit method (change this to suit your needs)
     # This edit method should only change attributes that are neither 'id' or metadatas.
     security.declareProtected(ChangeSubscriber, 'edit')
-    def edit(self, format='', active=False, email=''):
+    def edit(self, format='HTML', active=False, email=''):
         """
         edit(self, text = '') => object modification method
         """
 
         # Change attributes
-        self.format = format
+        self.format = format or 'HTML'
         self.active = not not active
         self.email = email.strip()
 
