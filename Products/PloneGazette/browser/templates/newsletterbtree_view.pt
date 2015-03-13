@@ -28,7 +28,9 @@
               Up one level
           </a>
 
-           <div metal:use-macro="here/subscribers_infos/macros/subscriber_listing" />
+           <tal:body define="searchPath python:'/'.join(context.getPhysicalPath());">
+               <div metal:use-macro="here/subscribers_infos/macros/subscriber_listing" />
+           </tal:body>
         </div>
     </body>
 </html>

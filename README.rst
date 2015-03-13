@@ -7,11 +7,20 @@ Motivation
 
 **(...also know as: "why branching?"...)**
 
-For a very long long time PloneGazette development has been stopped, and we continued a
-non-official set of changes.
+For a very long long time PloneGazette development stopped, and we continued fixing it with
+a long set of changes on a `non official branch`__.
 
-After a long long time the official development re-started, but our branch is **so** different that a
+__ https://svn.plone.org/svn/collective/PloneGazette/branches/redturtle-fixes/
+
+After a long long time the official development re-started, but our branch was **so** different that a
 merge was mostly impossible. But we like our changes!
+
+Documentation
+=============
+
+You can refer to the `official PloneGazette documentation`__.
+
+__ https://github.com/collective/Products.PloneGazette/blob/master/Products/PloneGazette/docs/README.rst
 
 Template stylesheets
 ====================
@@ -32,12 +41,12 @@ For example:
 Please note
 ===========
 
-This product is compatible with PloneGazette *but* you can't use both together (they use the same namespace!).
+This product is compatible with PloneGazette *but* you can't use both (they use the same namespace!).
 
 Dependencies
 ============
 
-This product has been tested on all Plone versions from 3.3 to 4.3.
+This product has been tested on all Plone versions from 4.0 to 4.3.
 
 Authors
 =======

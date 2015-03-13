@@ -1,11 +1,20 @@
 HISTORY
 =======
 
-4.0.1 (unreleased)
+4.1.0 (unreleased)
 ==================
 
-- Nothing changed yet.
+- I18n fixes
+  [keul]
+- Automatically create a subscribers folder inside the theme on creation.
+  This close `#3`__.
+  [keul]
+- Subscriber folder selection is now a combobox selection
+  [keul]
+- Multiple subscribers folder are now supported again. That means that selecting
+  a folder will use that as adresses source when sending.
 
+__ https://github.com/RedTurtle/TurtledGazette/issues/3
 
 4.0.0 (2013-12-16)
 ==================

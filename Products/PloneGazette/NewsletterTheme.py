@@ -187,7 +187,7 @@ class NewsletterTheme(SkinnedFolder.SkinnedFolder, DefaultDublinCoreImpl, PNLCon
     def _post_init(self):
         """Post-init method (that is, method that is called AFTER the class has been set into the ZODB)
         """
-        self.activationMailSubject = translate(_("Please activate your newsletter account"), self.REQUEST)
+        self.activationMailSubject = translate(_("Please activate your newsletter account"), context=self.REQUEST)
         self.activationMailTemplate = translate(_('default_activation_mail_template',
                                                   default=u"""Dear subscriber,
 
@@ -197,12 +197,14 @@ To do this, just browse to this URL...
 %(url)s
 Then you'll receive our next newsletters at %(email)s
 
-PLEASE DON'T REPLY TO THIS MAIL"""), self.REQUEST)
+PLEASE DON'T REPLY TO THIS MAIL"""), context=self.REQUEST)
         self.newsletterFooter = translate(_('default_newsletter_footer',
                                             default=u"""Thank you for subscribing to this newsletter.<br />
 You can <a href="%(url)s">change your preferences</a> at any time.
-"""), self.REQUEST)
-
+"""), context=self.REQUEST)
+        self.invokeFactory('NewsletterBTree', 'subscribers',
+                           title=translate(_('Subscribers'), context=self.REQUEST))
+        getattr(self, 'subscribers').indexObject()
         self.indexObject()
         self._initCatalog()
         return
@@ -911,12 +913,17 @@ ${count_not_valid} emails were not valid.""",
 
     # do not allow anonymous to list all subscribers
     security.declareProtected(ChangeNewsletterTheme, 'getSubscribers')
-    def getSubscribers(self, full_objects=False):
+    def getSubscribers(self, full_objects=False, currentLargeFolder=True, path=None):
         # get all items from catalog (all subscribers)
         cat = getattr(self, PG_CATALOG, None)
         if cat is None:
             return []
-        result = cat()
+        filters = {}
+        if path:
+            filters['path'] = path
+        elif currentLargeFolder:
+            filters['path'] = '/'.join(self.getPhysicalPath()) + '/' + self.subscriber_folder_id 
+        result = cat(**filters)
         if full_objects:
             result = [x.getObject() for x in result]
         return result
@@ -944,13 +951,22 @@ ${count_not_valid} emails were not valid.""",
 
         """
         ctool = getToolByName(self, 'portal_catalog')
-        items = ctool(path={'query':'/'.join(self.getPhysicalPath()), 'depth':1},
-                      sort_on='sortable_title')
-        return items
+        terms = dict(path={'query':'/'.join(self.getPhysicalPath()), 'depth':1},
+                           sort_on='sortable_title')
+        terms.update(contentFilter)
+        return ctool(**terms)
+
+    security.declareProtected(permissions.ListFolderContents, 'listLargeFolders')
+    def listLargeFolders(self):
+        """
+        Show all contained NewsletterBTree
+        """
+        return [{'title': x.Title,
+                 'id': x.id} for x in self.listFolderContents(contentFilter={'portal_type': 'NewsletterBTree'})]
 
     # For plone 2.1+ to show unindexed content
     security.declareProtected(ChangeNewsletterTheme, 'getFolderContents')
-    def getFolderContents(self, contentFilter=None,batch=False,b_size=100,full_objects=False):
+    def getFolderContents(self, contentFilter=None, batch=False, b_size=100, full_objects=False):
         """Override getFolderContents to show all objects"""
         contents = self.listFolderContents(contentFilter=contentFilter)
         if batch:

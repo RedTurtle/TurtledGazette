@@ -12,7 +12,7 @@ class NewsletterBTreeView(BrowserView):
     def listSubscribers(self):
         context = aq_inner(self.context)
         # blah, acquired from NewsletterTheme
-        subscribers = context.getSubscribers()
+        subscribers = context.getSubscribers(path='/'.join(context.getPhysicalPath()))
         result = []
         for s in subscribers:
             # process catalog brains

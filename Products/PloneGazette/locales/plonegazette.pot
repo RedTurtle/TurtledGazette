@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2013-10-16 08:36+0000\n"
+"POT-Creation-Date: 2015-03-13 14:17+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -52,7 +52,7 @@ msgstr ""
 msgid "Newsletter changes saved."
 msgstr ""
 
-#: ./NewsletterTheme.py:176
+#: ./NewsletterTheme.py:190
 msgid "Please activate your newsletter account"
 msgstr ""
 
@@ -63,7 +63,7 @@ msgstr ""
 msgid "SENDING TO NOT ACTIVE USERS."
 msgstr ""
 
-#: ./Newsletter.py:598
+#: ./Newsletter.py:597
 msgid "SMTP server related errors"
 msgstr ""
 
@@ -83,6 +83,10 @@ msgstr ""
 msgid "Subscriber"
 msgstr ""
 
+#: ./NewsletterTheme.py:207
+msgid "Subscribers"
+msgstr ""
+
 #: ./profiles/default/types/NewsletterBTree.xml
 msgid "Subscribers container"
 msgstr ""
@@ -91,11 +95,11 @@ msgstr ""
 msgid "Subscription activated"
 msgstr ""
 
-#: ./NewsletterTheme.py:574
+#: ./NewsletterTheme.py:582
 msgid "TALES compilation error: ${error}"
 msgstr ""
 
-#: ./Newsletter.py:600
+#: ./Newsletter.py:599
 msgid "The newsletter has been sent."
 msgstr ""
 
@@ -104,28 +108,28 @@ msgid "Unsubscribe"
 msgstr ""
 
 #. Default: "There is already a subscriber with this address"
-#: ./NewsletterTheme.py:445
+#: ./NewsletterTheme.py:453
 #: ./skins/PloneGazette/validate_subscriber_edit.vpy:26
 msgid "already_subscribed"
 msgstr ""
 
 #. Default: "You must add headers to the csv file : email, active, format ('email' at least)"
-#: ./NewsletterTheme.py:792
+#: ./NewsletterTheme.py:820
 msgid "csv_headers_error"
 msgstr ""
 
 #. Default: "${count_created} subscribers created.\n${count_already_there} users were already subscriber on this newsletter theme.\n${count_not_valid} emails were not valid."
-#: ./NewsletterTheme.py:844
+#: ./NewsletterTheme.py:872
 msgid "csv_import_report"
 msgstr ""
 
 #. Default: "Dear subscriber,\n\nWe have received and recorded your newsletter subscription.\nYou must now activate your account to receive our newsletters.\nTo do this, just browse to this URL...\n%(url)s\nThen you'll receive our next newsletters at %(email)s\n\nPLEASE DON'T REPLY TO THIS MAIL"
-#: ./NewsletterTheme.py:177
+#: ./NewsletterTheme.py:191
 msgid "default_activation_mail_template"
 msgstr ""
 
 #. Default: "Thank you for subscribing to this newsletter.<br />\nYou can <a href=\"%(url)s\">change your preferences</a> at any time.\n"
-#: ./NewsletterTheme.py:187
+#: ./NewsletterTheme.py:201
 msgid "default_newsletter_footer"
 msgstr ""
 
@@ -311,8 +315,8 @@ msgstr ""
 msgid "help_replyto"
 msgstr ""
 
-#. Default: "You can store all subscribers inside a \"Large Plone Folder\". First, create the folder inside your NewsletterTheme. Second, give here the folder id. All the subscribers will be create inside this new folder."
-#: ./skins/PloneGazette/NewsletterTheme_editForm.cpt:431
+#. Default: "Subscribers are stored inside \"Subscribers container\" items. Select the storage where you want to keep subscribers."
+#: ./skins/PloneGazette/NewsletterTheme_editForm.cpt:436
 msgid "help_subscriber_folder_id"
 msgstr ""
 
@@ -322,13 +326,13 @@ msgid "help_testEmail"
 msgstr ""
 
 #. Default: "Input is required but no input given"
-#: ./NewsletterTheme.py:432
+#: ./NewsletterTheme.py:440
 #: ./skins/PloneGazette/validate_subscriber_edit.vpy:15
 msgid "input_required"
 msgstr ""
 
 #. Default: "This is not a valid mail address"
-#: ./NewsletterTheme.py:438
+#: ./NewsletterTheme.py:446
 #: ./skins/PloneGazette/validate_newslettertheme_edit.vpy:16
 #: ./skins/PloneGazette/validate_subscriber_edit.vpy:20
 msgid "invalid_email_address"
@@ -439,7 +443,7 @@ msgstr ""
 msgid "label_replyto"
 msgstr ""
 
-#. Default: "Subscriber folder id"
+#. Default: "Subscriber folder"
 #: ./skins/PloneGazette/NewsletterTheme_editForm.cpt:430
 msgid "label_subscriber_folder_id"
 msgstr ""

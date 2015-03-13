@@ -29,6 +29,7 @@ class SubscribersCatalog(CatalogTool):
     def enumerateIndexes(self):
         """Returns indexes used by catalog"""
         return (
+                ('path', 'PathIndex'),
                 ('id', 'FieldIndex'),
                 ('email', 'FieldIndex'),
                 ('SearchableText', 'ZCTextIndex'),

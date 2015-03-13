@@ -427,19 +427,28 @@
                   subscriber_folder_id request/subscriber_folder_id|here/subscriber_folder_id | nothing"
       tal:attributes="class python:test(error, 'field error', 'field')">
 
-   <label i18n:translate="label_subscriber_folder_id">Subscriber folder id</label>
+   <label i18n:translate="label_subscriber_folder_id" for="subscriber_folder_id">Subscriber folder</label>
+   <span class="fieldRequired" title="Required"
+         i18n:domain="plone"
+         i18n:attributes="title"
+         i18n:translate="label_required">(Required)</span>
+
    <div i18n:translate="help_subscriber_folder_id"
         class="formHelp">
-    You can store all subscribers inside a "Large Plone Folder". First, create the folder inside your NewsletterTheme. Second, give here the folder id.
-    All the subscribers will be create inside this new folder.
+    Subscribers are stored inside "Subscribers container" items.
+    Select the storage where you want to keep subscribers.
    </div>
 
    <div tal:content="structure error">Validation error output</div>
-   <input type="text"
-          name="subscriber_folder_id"
-          value="#"
-          size="60"
-          tal:attributes="value subscriber_folder_id;" />
+   <select name="subscriber_folder_id" id="subscriber_folder_id">
+           <tal:available_sublargefolders
+              define="largefolders context/listLargeFolders"
+              repeat="lfolder largefolders">
+               <option tal:attributes="value lfolder/id;
+                                    selected python:lfolder['id']==subscriber_folder_id"
+                       tal:content="lfolder/title"></option>
+           </tal:available_sublargefolders>
+   </select>
 
  </div>
 
