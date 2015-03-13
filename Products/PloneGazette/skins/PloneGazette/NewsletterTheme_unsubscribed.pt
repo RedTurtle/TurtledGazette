@@ -16,7 +16,7 @@ $Id: NewsletterTheme_unsubscribed.pt 20510 2004-08-19 10:00:55Z zope $
                  data python: data[0];">
 
  <dl class="portalMessage">
-  <dt i18n:domain="">Done</dt>
+  <dt i18n:translate="">Done</dt>
   <dd i18n:translate="unsubscribe_success_message">You have been successfully unsubscribed from this newsletter.</dd>
  </dl>
 

@@ -1,24 +1,17 @@
 # -*- coding: utf-8 -*-
 
-# Zope core imports
-from Globals import InitializeClass
 from AccessControl import ClassSecurityInfo
-
-# CMF/Plone imports
-from Products.CMFCore.permissions import View
-from Products.CMFDefault.DublinCore import DefaultDublinCoreImpl
-from Products.CMFCore.PortalContent import PortalContent
-from Products.CMFCore.utils import getToolByName
-
-# Product specific imports
-from PNLPermissions import *
-#from PNLUtils import ownerOfObject
-from PNLUtils import checkMailAddress
+from Globals import InitializeClass
 from PNLBase import PNLContentBase
+from PNLPermissions import *
+from PNLUtils import checkMailAddress
+from Products.CMFCore.PortalContent import PortalContent
+from Products.CMFCore.permissions import View
+from Products.CMFCore.utils import getToolByName
+from Products.CMFDefault.DublinCore import DefaultDublinCoreImpl
 from Products.PloneGazette.config import PG_CATALOG
-#################
-## The factory ##
-#################
+from AccessControl import getSecurityManager
+
 
 def addSubscriber(self, id, email = '', REQUEST = {}):
     """
@@ -182,6 +175,12 @@ class Subscriber(PortalContent, DefaultDublinCoreImpl, PNLContentBase):
     # All indexing methods uses this method to get corrent catalog
     def _getCatalogTool(self):
         return getattr(self.getTheme(), PG_CATALOG, None)
+
+    security.declarePublic('canManage')
+    def canManage(self):
+        """Check is current user can manage newsletter"""
+        sm = getSecurityManager()
+        return sm.checkPermission(ChangeNewsletterTheme, self)
 
 # Class instanciation
 InitializeClass(Subscriber)

@@ -75,7 +75,8 @@
    <!-- Account activation Field -->
 
    <div class="field"
-        tal:define="active request/active | here/active;">
+        tal:define="active request/active | here/active;"
+		tal:condition="context/canManage">
        
      <tal:block  tal:define="active request/active | here/active;">
 

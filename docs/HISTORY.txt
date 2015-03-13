@@ -13,8 +13,11 @@ HISTORY
   [keul]
 - Multiple subscribers folder are now supported again. That means that selecting
   a folder will use that as adresses source when sending.
+- "Activate account" is now not show to subsacribers. This close `#4`__
+  [keul]
 
 __ https://github.com/RedTurtle/TurtledGazette/issues/3
+__ https://github.com/RedTurtle/TurtledGazette/issues/4
 
 4.0.0 (2013-12-16)
 ==================

@@ -3,7 +3,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2015-03-13 14:17+0000\n"
+"POT-Creation-Date: 2015-03-13 15:22+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: Luca Fabbri <keul@redturtle.it>\n"
 "Language-Team: RedTurtle Technology <sviluppoplone@redturtle.it>\n"
@@ -30,6 +30,10 @@ msgstr "Un contenuto newsletter, da inviare agli iscritti"
 #: ./profiles/default/types/Subscriber.xml
 msgid "A newletter subscriber"
 msgstr "Un iscritto alla newsletter"
+
+#: ./skins/PloneGazette/NewsletterTheme_unsubscribed.pt:19
+msgid "Done"
+msgstr "Fatto"
 
 #: ./profiles/default/types/NewsletterBTree.xml
 msgid "Folder for storing subscribers"
@@ -84,7 +88,7 @@ msgstr "Iscrizione alla newsletter"
 msgid "Subscriber"
 msgstr "Iscritto"
 
-#: ./NewsletterTheme.py:207
+#: ./NewsletterTheme.py:206
 msgid "Subscribers"
 msgstr "Iscritti"
 
@@ -96,7 +100,7 @@ msgstr "Contenitore degli iscritti"
 msgid "Subscription activated"
 msgstr "Iscrizione attivata"
 
-#: ./NewsletterTheme.py:582
+#: ./NewsletterTheme.py:581
 msgid "TALES compilation error: ${error}"
 msgstr ""
 
@@ -105,23 +109,23 @@ msgid "The newsletter has been sent."
 msgstr "La newsletter è stata inviata"
 
 #. Default: "Unsubscribe"
-#: ./skins/PloneGazette/Subscriber_editForm.cpt:144
+#: ./skins/PloneGazette/Subscriber_editForm.cpt:145
 msgid "Unsubscribe"
 msgstr "Cancella iscrizione"
 
 #. Default: "There is already a subscriber with this address"
-#: ./NewsletterTheme.py:453
+#: ./NewsletterTheme.py:452
 #: ./skins/PloneGazette/validate_subscriber_edit.vpy:26
 msgid "already_subscribed"
 msgstr ""
 
 #. Default: "You must add headers to the csv file : email, active, format ('email' at least)"
-#: ./NewsletterTheme.py:820
+#: ./NewsletterTheme.py:819
 msgid "csv_headers_error"
 msgstr ""
 
 #. Default: "${count_created} subscribers created.\n${count_already_there} users were already subscriber on this newsletter theme.\n${count_not_valid} emails were not valid."
-#: ./NewsletterTheme.py:872
+#: ./NewsletterTheme.py:871
 msgid "csv_import_report"
 msgstr ""
 
@@ -244,7 +248,7 @@ msgstr ""
 #. Default: "Your account"
 #: ./skins/PloneGazette/Subscriber_editForm.cpt:14
 msgid "heading_your_account_title"
-msgstr ""
+msgstr "Il tuo account"
 
 #. Default: "This text will show as subject of the activation mail sent after a new subscriber registers.<br />"
 #: ./skins/PloneGazette/NewsletterTheme_editForm.cpt:251
@@ -257,7 +261,7 @@ msgid "help_activationMailTemplate"
 msgstr "Inserite il template dell'email in formato Testo inviata ai nuovi iscritti.<br /> Nota: questo testo <b>deve</b> includere <b>%(url)s</b> e <b>%(email)s</b> che saranno rispettivamente sostituiti dall'URL relativo alla preferenze dell'account e dall'indirizzo email del nuovo iscritto."
 
 #. Default: "Check this box to receive newsletters."
-#: ./skins/PloneGazette/Subscriber_editForm.cpt:84
+#: ./skins/PloneGazette/Subscriber_editForm.cpt:85
 msgid "help_active"
 msgstr "Seleziona questa casella per ricevere la newsletter"
 
@@ -343,13 +347,13 @@ msgid "help_testEmail"
 msgstr "Inserite un indirizzo email. Questo indirizzo sarà utilizzato per le prove e le notifiche."
 
 #. Default: "Input is required but no input given"
-#: ./NewsletterTheme.py:440
+#: ./NewsletterTheme.py:439
 #: ./skins/PloneGazette/validate_subscriber_edit.vpy:15
 msgid "input_required"
 msgstr "L'informazione è richiesta ma non è stata fornita"
 
 #. Default: "This is not a valid mail address"
-#: ./NewsletterTheme.py:446
+#: ./NewsletterTheme.py:445
 #: ./skins/PloneGazette/validate_newslettertheme_edit.vpy:16
 #: ./skins/PloneGazette/validate_subscriber_edit.vpy:20
 msgid "invalid_email_address"
@@ -371,7 +375,7 @@ msgid "label_activation_status"
 msgstr "Stato di attivazione"
 
 #. Default: "Account activation"
-#: ./skins/PloneGazette/Subscriber_editForm.cpt:82
+#: ./skins/PloneGazette/Subscriber_editForm.cpt:83
 #: ./skins/PloneGazette/subscribers_infos.pt:143
 msgid "label_active"
 msgstr "Attivazione account"
@@ -523,7 +527,7 @@ msgid "legend_subscriber_edit"
 msgstr "Le tue preferenze di iscrizione"
 
 #. Default: "Unsubscribe this newsletter"
-#: ./skins/PloneGazette/Subscriber_editForm.cpt:137
+#: ./skins/PloneGazette/Subscriber_editForm.cpt:138
 msgid "legend_subscriber_unsubscribe"
 msgstr "Cancella iscrizione a questa newsletter"
 
