@@ -6,7 +6,7 @@ setup(name='TurtledGazette',
       version='4.1.0.dev0',
       description='A complete Newsletter product for Plone (an alternate version of Products.PloneGazette)',
       long_description=open("README.rst").read() + "\n" +
-                       open(os.path.join("docs", "HISTORY.txt")).read(),
+                       open(os.path.join("docs", "HISTORY.rst")).read(),
       author='Pilot Systems',
       author_email='',
       maintainer='RedTurtle Technology',
