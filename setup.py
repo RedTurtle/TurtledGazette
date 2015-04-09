@@ -14,7 +14,6 @@ setup(name='TurtledGazette',
       classifiers=[
             'Programming Language :: Python',
             'Framework :: Plone',
-            'Framework :: Plone :: 3.3',
             'Framework :: Plone :: 4.0',
             'Framework :: Plone :: 4.1',
             'Framework :: Plone :: 4.2',
@@ -29,6 +28,7 @@ setup(name='TurtledGazette',
       install_requires=[
             'setuptools',
             'elementtree',
+            'plone.app.blob',
       ],
       namespace_packages=['Products'],
       entry_points="""

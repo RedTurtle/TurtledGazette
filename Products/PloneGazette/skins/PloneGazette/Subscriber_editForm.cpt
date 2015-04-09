@@ -32,7 +32,7 @@
                     Email request/email | context/email;"
         tal:attributes="class python:test(error, 'field error', 'field')">
     
-     <label i18n:translate="label_email">E-mail</label>
+     <label i18n:translate="label_email" for="email">E-mail</label>
 
      <span class="fieldRequired" title="Required"
            i18n:attributes="title" i18n:domain="plone"
@@ -54,7 +54,7 @@
         tal:define="format request/format | here/format;
                     nltheme python:here.getTheme()">
     
-     <label i18n:translate="label_format">Format</label>
+     <label i18n:translate="label_format" for="format-HTML">Format</label>
 
      <div i18n:translate="help_format"
           class="formHelp">
@@ -80,7 +80,7 @@
        
      <tal:block  tal:define="active request/active | here/active;">
 
-     <label i18n:translate="label_active">Account activation</label>
+     <label i18n:translate="label_active" for="active">Account activation</label>
 
      <div i18n:translate="help_active"
           class="formHelp">

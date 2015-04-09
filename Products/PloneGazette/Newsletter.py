@@ -5,45 +5,42 @@ import traceback
 import cStringIO
 import email.Message
 import email.Utils
-from email.Header import Header
-
-# Zope core imports
+import StringIO
 import transaction
-#from zope.i18n import translate
-from Globals import InitializeClass
-from AccessControl import ClassSecurityInfo
-from AccessControl.requestmethod import postonly
-from AccessControl.SpecialUsers import nobody
-from DateTime import DateTime
-from OFS import Folder
-from DocumentTemplate.DT_Util import html_quote
 import logging
 
-# CMF/Plone imports
-from Products.CMFCore.permissions import View, ModifyPortalContent
-from Products.CMFCore.permissions import ListFolderContents
-from Products.CMFDefault.DublinCore import DefaultDublinCoreImpl
+from AccessControl import ClassSecurityInfo
+from AccessControl.SpecialUsers import nobody
+from AccessControl.requestmethod import postonly
+from DateTime import DateTime
+from DocumentTemplate.DT_Util import html_quote
+from Globals import InitializeClass
+from OFS import Folder
+from email.Header import Header
+from email.mime.base import MIMEBase
+from email import encoders
+from PNLBase import PNLContentBase
+from PNLPermissions import *
 from Products.CMFCore.PortalContent import PortalContent
+from Products.CMFCore.permissions import ListFolderContents
+from Products.CMFCore.permissions import View, ModifyPortalContent
 from Products.CMFCore.utils import getToolByName
+from Products.CMFDefault.DublinCore import DefaultDublinCoreImpl
 from Products.CMFPlone.utils import safe_unicode
+from Products.PloneGazette import PloneGazetteFactory as _
+from Products.PloneGazette.PNLUtils import sizeof_fmt
+from elementtree import ElementTree
+from elementtree import HTMLTreeBuilder
+from plone.app.blob.interfaces import IBlobbable
+from plone.app.blob.field import BlobWrapper
+from plone.app.blob.field import ReuseBlob
+from urlparse import urlparse
+from zope.i18n import translate
 
 try:
     from zope.structuredtext.html import HTML as format_stx
 except:
     from Products.CMFCore.utils import format_stx
-
-from Products.PloneGazette import PloneGazetteFactory as _
-from PNLPermissions import *
-from PNLBase import PNLContentBase
-
-
-# Additional imports for converting relative to absolute links
-from elementtree import HTMLTreeBuilder
-from elementtree import ElementTree
-from urlparse import urlparse
-import StringIO
-
-
 
 
 
@@ -148,7 +145,8 @@ class Newsletter(PortalContent, DefaultDublinCoreImpl, PNLContentBase):
 
     # Init method
     security.declarePrivate('__init__')
-    def __init__(self, id, title='', description='', text_format='', text='', dateEmitted=None):
+    def __init__(self, id, title='', description='', text_format='', text='', dateEmitted=None,
+                 attachment=None):
         """__init__(self, id, title='')"""
 
         DefaultDublinCoreImpl.__init__(self)
@@ -158,6 +156,7 @@ class Newsletter(PortalContent, DefaultDublinCoreImpl, PNLContentBase):
         self._edit(text=text, text_format=text_format)
         self.setFormat(text_format)
         self.dateEmitted = dateEmitted
+        self.attachment=attachment
         self._new_object=True
         self._dynamic_content = None
         return
@@ -196,7 +195,7 @@ class Newsletter(PortalContent, DefaultDublinCoreImpl, PNLContentBase):
     # Edit method (change this to suit your needs)
     # This edit method should only change attributes that are neither 'id' or metadatas.
     security.declareProtected(ChangeNewsletter, 'edit')
-    def edit(self, title='', text='', dateEmitted=None, text_format=''):
+    def edit(self, title='', text='', dateEmitted=None, text_format='', attachment=None):
         """
         edit(self, text = '') => object modification method
         """
@@ -218,6 +217,11 @@ class Newsletter(PortalContent, DefaultDublinCoreImpl, PNLContentBase):
         if text:
             self._edit(text=text, text_format=text_format)
 
+        if self.REQUEST.form.get('attachment_delete')=='delete':
+            self.attachment = None
+        elif attachment:
+            self._saveBlob(attachment)
+
         if self._new_object and title:
             plone_tool = getToolByName(self, 'plone_utils')
             newid = plone_tool.normalizeString(title)
@@ -233,6 +237,43 @@ class Newsletter(PortalContent, DefaultDublinCoreImpl, PNLContentBase):
         # Reindex
         self.reindexObject()
         return
+
+    security.declarePrivate('_saveBlob')
+    def _saveBlob(self, attachment):
+        content_type = attachment.headers.get('content-type')
+        content_disposition = attachment.headers.get('content-disposition', '')
+        filename = re.search(r'''filename="([^"]+)"''', content_disposition)
+        if filename:
+             filename = filename.groups()[0]
+        data = str(attachment.read())
+        blob = BlobWrapper(content_type)
+        if isinstance(data, basestring):
+            data = StringIO.StringIO(data) # simple strings cannot be adapted...
+            setattr(data, 'filename', filename)
+        if data is not None:
+            blobbable = IBlobbable(data)
+            try:
+                blobbable.feed(blob.getBlob())
+            except ReuseBlob, exception:
+                blob.setBlob(exception.args[0]) # reuse the given blob
+        blob.setFilename(blobbable.filename())
+        self.attachment = blob
+        transaction.savepoint(optimistic=True)
+
+    security.declareProtected(View, 'attachment_data')
+    def attachment_data(self):
+        attachment = self.attachment
+        if not attachment:
+            return None
+        return {'filename': attachment.getFilename(),
+                'content_type': attachment.getContentType(),
+                'size': sizeof_fmt(attachment.get_size()),
+                }
+
+    security.declareProtected(View, 'download_attachment')
+    def download_attachment(self):
+        """Download stored attachment"""
+        return self.attachment.index_html()
 
     security.declareProtected(View, 'CookedBody')
     def CookedBody(self, stx_level=None, setLevel=0):
@@ -390,8 +431,10 @@ class Newsletter(PortalContent, DefaultDublinCoreImpl, PNLContentBase):
         return data
 
     def manageUrls(self, html):
+        # BBB: this is a mess, refactorgin using regular expression or an HTML parsing utility
         urls = []
         reference_indexes = []
+        theme = self.getTheme()
         start_indexes = [m.end() for m in re.finditer('href="', html)]
         for start in start_indexes:
             end = html.find('"', start)
@@ -403,9 +446,18 @@ class Newsletter(PortalContent, DefaultDublinCoreImpl, PNLContentBase):
         for index in reference_indexes:
             html = html[:index] + ' [' + str(n_reference) + '] ' + html[index:]
             n_reference = n_reference - 1
-        html = html + '\r\n-------------- Riferimenti --------------\r\n'
+        # TODO: fix this i18n issue
+        html = html + '\r\n-------------- %s --------------\r\n' % translate(_(u'References'), context=self.REQUEST)
         for seq, url in enumerate(urls):
             html = html + '[' + str(seq + 1) + '] ' + url + '\r\n'
+        # right now we don't send attachments in text/plain messages
+        if self.attachment:
+            here_url = self.absolute_url()
+            if theme.alternative_portal_url:
+                portal_url = getToolByName(self, 'portal_url')()
+                here_url.replace(portal_url, theme.alternative_portal_url, 1)
+            html = html + '\r\n-------------- %s --------------\r\n' % translate(_(u'Attachment'), context=self.REQUEST)
+            html = html + '[' + self.absolute_url() + '/download_attachment\r\n'
         return html
 
 
@@ -473,7 +525,7 @@ class Newsletter(PortalContent, DefaultDublinCoreImpl, PNLContentBase):
         email = REQUEST.get('email', None) or theme.testEmail
         editurl = theme.absolute_url() + '/xxx'
 
-        # We want to test the unsubscribe url too and we asume the test subscriber is locade in the theme
+        # We want to test the unsubscribe url too and we asume the test subscriber is located in the theme
         for subscriber in theme.objectValues('Subscriber'):
             if subscriber.Title() == email:
                 si = subscriber.mailingInfo()
@@ -550,7 +602,19 @@ class Newsletter(PortalContent, DefaultDublinCoreImpl, PNLContentBase):
                 subMsg["Content-Disposition"]="inline"
                 subMsg.set_payload(safe_unicode(new_htmlTpl).encode(charset), charset)
                 mainMsg.attach(subMsg)
+
+                # BBB: there's now reason why text/plain newsletter must not carry also attachments
+                if self.attachment:
+                    fp = self.attachment.getBlob().open()
+                    attachMsg = MIMEBase(*self.attachment.getContentType().split('/'))
+                    attachMsg.set_payload(fp.read())
+                    fp.close()
+                    encoders.encode_base64(attachMsg)
+                    attachMsg.add_header('Content-Disposition', 'attachment', filename=self.attachment.getFilename())
+                    mainMsg.attach(attachMsg)
+                
             else:
+                # Plain text
                 new_plaintextTpl = plaintextTpl
                 if hasurl:
                     new_plaintextTpl = new_plaintextTpl.replace('%(url)s', editurl)

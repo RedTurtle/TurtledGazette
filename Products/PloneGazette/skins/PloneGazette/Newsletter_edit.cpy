@@ -5,7 +5,7 @@
 ##bind script=script
 ##bind state=state
 ##bind subpath=traverse_subpath
-##parameters=id='', title=None, description=None, text=None, dateEmitted=None, text_format='text'
+##parameters=id='', title=None, description=None, text=None, dateEmitted=None, text_format='text', attachment=None
 ##title=Edit content and metadata
 ##
 # 
@@ -19,7 +19,8 @@ new_context = context.portal_factory.doCreate(context, id)
 new_context.edit(text_format=text_format,
                  text=text,
                  title=title,
-                 dateEmitted=dateEmitted)
+                 dateEmitted=dateEmitted,
+                 attachment=attachment)
 
 new_context.plone_utils.contentEdit(new_context)
 

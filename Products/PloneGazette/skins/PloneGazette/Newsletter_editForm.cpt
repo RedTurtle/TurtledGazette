@@ -1,6 +1,6 @@
 <html metal:use-macro="here/main_template/macros/master"
       xmlns="http://www.w3.org/1999/xhtml"
-	  i18n:domain="plonegazette"
+      i18n:domain="plonegazette"
       xml:lang="en-US"
       lang="en-US">
 
@@ -131,6 +131,57 @@
       </div>
     </tal:bbb>
 
+  </div>
+
+  <div class="field"
+       tal:define="attachment context/attachment_data">
+
+    <label for="attachment" i18n:translate="">Attachment</label>
+    <div class="formHelp" i18n:translate="attachment_help">
+        Attachment that will be sent with this newsletter.
+		Subscribers with HTML format preference will receive the attachment in the email,
+		while subscribers with plain text will only get an URL for downloading the file
+    </div>
+    
+    <div class="nlAttachment">
+        <div tal:condition="attachment">
+            <a href="" taget="_blank"
+               tal:content="attachment/filename"
+               tal:attributes="href string:${context/absolute_url}/download_attachment">aaa.pdf</a>
+            <span class="discreet">
+                (<span tal:replace="attachment/content_type" />)
+                <span tal:replace="attachment/size" />
+            </span>
+        </div>
+
+        <input class="noborder" value="nochange" checked="checked" name="attachment_delete"
+               onclick="document.getElementById('attachment').disabled=true" id="attachment_nochange" type="radio" />
+        <label for="attachment_nochange" i18n:domain="plone" i18n:translate="nochange_file">
+            Keep existing file
+          </label><br>
+            
+        <input class="noborder" value="delete" name="attachment_delete"
+               onclick="document.getElementById('attachment').disabled=true" id="attachment_delete" type="radio">
+         <label for="attachment_delete" i18n:domain="plone" i18n:translate="delete_file">
+            Delete current file
+         </label><br>
+        
+        <input class="noborder" value="" name="attachment_delete"
+               tal:attributes="checked python:not attachment and 'checked' or nothing"
+               onclick="document.getElementById('attachment').disabled=false" id="attachment_upload" type="radio">
+         <label for="attachment_upload" i18n:domain="plone" i18n:translate="upload_file">
+              Replace with new file:
+         </label>
+         <div style="padding-left:1.5em;padding-top:0.5em;">
+            <input type="file" id="attachment" name="attachment" size="30" />     
+            <script type="text/javascript"
+                tal:define="isDisabled python:attachment and attachment.get('size') and 'true' or 'false'"
+                    tal:content="string:document.getElementById('attachment').disabled=$isDisabled;">
+            </script>
+         </div>
+
+    </div>
+    
   </div>
 
    <tal:block tal:condition="nothing">

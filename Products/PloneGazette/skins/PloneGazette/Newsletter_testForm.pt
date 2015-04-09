@@ -17,9 +17,10 @@
         There were errors when sending newsletter. 
         Error log contains additional informations. Please fix it before sending newsletter to the recipients.
     </div>  
-    <div tal:condition="not:errors" class="portalMessage info" i18n:translate="text_test_send_ok">
-        Test newsletter has been sent.
-    </div> 
+    <dl tal:condition="not:errors" class="portalMessage info">
+    	<dt i18n:domain="plone" i18n:translate="">Note</dt>
+        <dd i18n:translate="text_test_send_ok">Test newsletter has been sent.</dd>
+    </dl> 
  </div>
 
  <h1 i18n:translate="heading_test_newsletter">

@@ -3,7 +3,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2015-03-13 15:22+0000\n"
+"POT-Creation-Date: 2015-04-09 13:01+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: Luca Fabbri <keul@redturtle.it>\n"
 "Language-Team: RedTurtle Technology <sviluppoplone@redturtle.it>\n"
@@ -31,6 +31,11 @@ msgstr "Un contenuto newsletter, da inviare agli iscritti"
 msgid "A newletter subscriber"
 msgstr "Un iscritto alla newsletter"
 
+#: ./Newsletter.py:459
+#: ./skins/PloneGazette/Newsletter_editForm.cpt:139
+msgid "Attachment"
+msgstr "Allegato"
+
 #: ./skins/PloneGazette/NewsletterTheme_unsubscribed.pt:19
 msgid "Done"
 msgstr "Fatto"
@@ -51,7 +56,11 @@ msgstr ""
 msgid "Newsletter Theme"
 msgstr "Tema della newsletter"
 
-#: ./skins/PloneGazette/Newsletter_edit.cpy:29
+#: ./skins/PloneGazette/Newsletter_view.pt:34
+msgid "Newsletter attachment"
+msgstr "Allegato alla newsletter"
+
+#: ./skins/PloneGazette/Newsletter_edit.cpy:30
 msgid "Newsletter changes saved."
 msgstr "Le modifiche alla Newsletter sono state salvate."
 
@@ -62,11 +71,15 @@ msgstr "Prego attiva la tua iscrizione alla newsletter"
 msgid "PloneGazette (RedTurtle edition)"
 msgstr "PloneGazette (versione RedTurtle)"
 
-#: ./Newsletter.py:589
+#: ./Newsletter.py:450
+msgid "References"
+msgstr "Riferimenti"
+
+#: ./Newsletter.py:646
 msgid "SENDING TO NOT ACTIVE USERS."
 msgstr ""
 
-#: ./Newsletter.py:597
+#: ./Newsletter.py:654
 msgid "SMTP server related errors"
 msgstr "Errori legati al server SMTP"
 
@@ -74,6 +87,10 @@ msgstr "Errori legati al server SMTP"
 #: ./skins/PloneGazette/Newsletter_sendForm.pt:39
 msgid "Send all subscribers"
 msgstr "Invia a tutti gli iscritti"
+
+#: ./skins/PloneGazette/Newsletter_view.pt:19
+msgid "Sent"
+msgstr "Inviata"
 
 #. Default: "Subscribe"
 #: ./skins/PloneGazette/portlet_gazette.pt:71
@@ -104,7 +121,7 @@ msgstr "Iscrizione attivata"
 msgid "TALES compilation error: ${error}"
 msgstr ""
 
-#: ./Newsletter.py:599
+#: ./Newsletter.py:656
 msgid "The newsletter has been sent."
 msgstr "La newsletter è stata inviata"
 
@@ -118,6 +135,13 @@ msgstr "Cancella iscrizione"
 #: ./skins/PloneGazette/validate_subscriber_edit.vpy:26
 msgid "already_subscribed"
 msgstr ""
+
+#. Default: "Attachment that will be sent with this newsletter. Subscribers with HTML format preference will receive the attachment in the email, while subscribers with plain text will only get an URL for downloading the file"
+#: ./skins/PloneGazette/Newsletter_editForm.cpt:140
+msgid "attachment_help"
+msgstr ""
+"Allegato da inviate con questa newsletter.\n"
+"Gli scritti con preferenza al formato HTML riceveranno l'allegato nell'e-mail, mentre gli scritti con testo semplice riceveranno un URL dal quale scaricare il file"
 
 #. Default: "You must add headers to the csv file : email, active, format ('email' at least)"
 #: ./NewsletterTheme.py:819
@@ -148,7 +172,7 @@ msgstr ""
 msgid "default_newsletter_footer"
 msgstr ""
 "Grazie per la tua iscrizione a questa newsletter.<br />\n"
-"Ora puoi <a href=\"%(url)s\">cambiare le tue preference</a> in qualunque momento."
+"Puoi <a href=\"%(url)s\">cambiare le tue preferenze</a> in qualunque momento."
 
 #. Default: "Active"
 #: ./skins/PloneGazette/subscribers_infos.pt:29
@@ -226,7 +250,7 @@ msgid "heading_subscribers"
 msgstr "Iscritti"
 
 #. Default: "Test Newsletter"
-#: ./skins/PloneGazette/Newsletter_testForm.pt:25
+#: ./skins/PloneGazette/Newsletter_testForm.pt:26
 msgid "heading_test_newsletter"
 msgstr "Test Newsletter"
 
@@ -271,7 +295,7 @@ msgid "help_authorEmail"
 msgstr "Inserite un indirizzo email. Questo apparirà come il mittente della newsletter."
 
 #. Default: "The date this newsletter was sent. Can be changed manually. Normally filled automatically while sending."
-#: ./skins/PloneGazette/Newsletter_editForm.cpt:153
+#: ./skins/PloneGazette/Newsletter_editForm.cpt:204
 msgid "help_dateEmitted"
 msgstr "Data di emissione della newsletter. Può essere cambiata manualmente. Normalmente viene conpilata automaticamente all'invio."
 
@@ -396,7 +420,7 @@ msgid "label_choose_newsletter"
 msgstr "Scegli una newsletter"
 
 #. Default: "Date emitted"
-#: ./skins/PloneGazette/Newsletter_editForm.cpt:152
+#: ./skins/PloneGazette/Newsletter_editForm.cpt:203
 msgid "label_dateEmitted"
 msgstr "Data di emissione"
 
@@ -565,12 +589,12 @@ msgid "please_fix_errors"
 msgstr ""
 
 #. Default: "Click here to see the preview of the <b>HTML newsletter</b> (as displayed in a MUA) in a new window."
-#: ./skins/PloneGazette/Newsletter_testForm.pt:32
+#: ./skins/PloneGazette/Newsletter_testForm.pt:33
 msgid "preview_html_link"
 msgstr "Clicca qui per vedere un'anteprima della newsletter <b>in formato HTML</b> in una nuova finestra."
 
 #. Default: "Click here to see the preview of the <b>plain text newsletter</b> (as displayed in a MUA) in a new window."
-#: ./skins/PloneGazette/Newsletter_testForm.pt:41
+#: ./skins/PloneGazette/Newsletter_testForm.pt:42
 msgid "preview_plaintext_link"
 msgstr "Clicca qui per vedere un'anteprima della newsletter <b>in formato Testo</b> in una nuova finestra."
 
@@ -605,7 +629,7 @@ msgid "template_format_error"
 msgstr ""
 
 #. Default: "Click here to <b>send this newsletter</b> as plain text and HTML to"
-#: ./skins/PloneGazette/Newsletter_testForm.pt:50
+#: ./skins/PloneGazette/Newsletter_testForm.pt:51
 msgid "test_send_newsletter_link"
 msgstr "Clicca qui per <b>inviare questa newsletter</b> in formato Testo e HTML a"
 
@@ -645,7 +669,7 @@ msgid "text_newsletter_activated"
 msgstr ""
 
 #. Default: "The newsletter has been sent at ${date}"
-#: ./skins/PloneGazette/Newsletter_view.pt:19
+#: ./skins/PloneGazette/Newsletter_view.pt:21
 msgid "text_newsletter_already_sent"
 msgstr "La newsletter è stata invata in data ${date}"
 
@@ -685,9 +709,9 @@ msgid "text_test_send_errors"
 msgstr ""
 
 #. Default: "Test newsletter has been sent."
-#: ./skins/PloneGazette/Newsletter_testForm.pt:20
+#: ./skins/PloneGazette/Newsletter_testForm.pt:22
 msgid "text_test_send_ok"
-msgstr ""
+msgstr "La newsletter di test è stata inviata"
 
 #. Default: "Upload here a csv file to create subscribers."
 #: ./skins/PloneGazette/NewsletterTheme_importForm.pt:39

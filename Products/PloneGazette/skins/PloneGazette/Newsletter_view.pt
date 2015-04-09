@@ -7,17 +7,20 @@
 <div metal:fill-slot="main"
      i18n:domain="plonegazette" 
      tal:define="len_text python:len(context.text);
-				 toLocalizedTime nocall:context/@@plone/toLocalizedTime;
+                 toLocalizedTime nocall:context/@@plone/toLocalizedTime;
                  dateEmitted python:context.dateEmitted and toLocalizedTime(context.dateEmitted);
                  view python:1">
 
  <h1 tal:content="here/title_or_id" class="documentFirstHeading">
     Title or id
  </h1>
- <br />
- <div tal:condition="dateEmitted" i18n:translate="text_newsletter_already_sent">
-  The newsletter has been sent at <span i18n:name="date" tal:replace="python:toLocalizedTime(dateEmitted, long_format=1)">2003/10/25</span>
- </div>
+
+ <dl class="portalMessage warning" tal:condition="dateEmitted">
+ <dt i18n:translate="">Sent</dt>
+  <dd i18n:translate="text_newsletter_already_sent">
+  	The newsletter has been sent at <span i18n:name="date" tal:replace="python:toLocalizedTime(dateEmitted, long_format=1)">2003/10/25</span>
+  </dd>
+ </dl>
 
  <p class="documentDescription" tal:content="here/description | nothing">Description</p>
 
@@ -25,6 +28,17 @@
       tal:condition="len_text"
       tal:attributes="class python:test(here.Format() in ('text/structured', 'text/x-rst',), 'stx', 'plain')">
    <div tal:replace="structure python:here.CookedBody(stx_level=2)" />
+ </div>
+
+ <div class="nlAttachment" tal:define="attachment context/attachment_data" tal:condition="attachment">
+ 	<strong i18n:translate="">Newsletter attachment</strong><br />
+    <a href="" taget="_blank"
+           tal:content="attachment/filename"
+           tal:attributes="href string:${context/absolute_url}/download_attachment">aaa.pdf</a>
+    <span class="discreet">
+        (<span tal:replace="attachment/content_type" />)
+        <span tal:replace="attachment/size" />
+    </span>     
  </div>
 
 </div>
