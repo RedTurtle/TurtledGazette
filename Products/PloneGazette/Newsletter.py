@@ -1,13 +1,6 @@
-#
-# $Id: Newsletter.py 251744 2012-11-20 14:55:18Z mircoangelini $
-#
-
-"""Newsletter class"""
-
-# Python core imports
+# -*- coding: utf-8 -*-
 
 import re
-
 import traceback
 import cStringIO
 import email.Message
@@ -567,7 +560,7 @@ class Newsletter(PortalContent, DefaultDublinCoreImpl, PNLContentBase):
 
             try:
                 mailMethod(mailFrom, (mailTo,), mainMsg, subject = titleForMessage)
-            except Exception,e:
+            except Exception:
                 errors.append(mailTo)
                 tbfile = cStringIO.StringIO()
                 traceback.print_exc(file=tbfile)
