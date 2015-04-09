@@ -4,8 +4,8 @@ HISTORY
 4.1.1 (unreleased)
 ==================
 
-- Nothing changed yet.
-
+- Fixed issues with old Newsletters without the new ``attachment`` attribute
+  [keul]
 
 4.1.0 (2015-04-09)
 ==================

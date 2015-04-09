@@ -262,7 +262,7 @@ class Newsletter(PortalContent, DefaultDublinCoreImpl, PNLContentBase):
 
     security.declareProtected(View, 'attachment_data')
     def attachment_data(self):
-        attachment = getattr(self, 'attachment')
+        attachment = getattr(self, 'attachment', None)
         if not attachment:
             return None
         return {'filename': attachment.getFilename(),
