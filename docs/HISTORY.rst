@@ -6,6 +6,8 @@ HISTORY
 
 - Fixed issues with old Newsletters without the new ``attachment`` attribute
   [keul]
+- Fixed utf-8 encoding issues when sending text/plain messages
+  [keul]
 
 4.1.0 (2015-04-09)
 ==================

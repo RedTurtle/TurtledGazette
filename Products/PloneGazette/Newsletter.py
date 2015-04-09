@@ -495,7 +495,7 @@ class Newsletter(PortalContent, DefaultDublinCoreImpl, PNLContentBase):
                 # fixup URL references
                 text = lynx_file_url.sub('%(url)s', text)
         else:
-            text = transform_tool.convertToData('text/plain', html)
+            text = transform_tool.convertToData('text/plain', html.encode('utf-8'))
         #remove some garbage in the string
         text =  text.lstrip(' \n')
         if REQUEST is not None:
