@@ -142,6 +142,9 @@ class NewsletterTheme(SkinnedFolder.SkinnedFolder, DefaultDublinCoreImpl, PNLCon
     _stx_level = 1
     
     cooked_text = text = text_format = ''
+    
+    _format_list = [{'id': 'HTML', 'label': _('HTML')},
+                    {'id': 'Text', 'label': _('Text')}]
 
     # Dummy permission instanciation.
     # Permissions has to be "dummily" instanciated in order to be reachable for the factory_type_information structure.
@@ -158,7 +161,6 @@ class NewsletterTheme(SkinnedFolder.SkinnedFolder, DefaultDublinCoreImpl, PNLCon
         self._internalVersion = 2
         self._subscribersCount = 0
         self.id = id
-        self.format_list = ['HTML', 'Text']
         self.default_format = 'HTML'
         self.title = title
         self.description = ''
@@ -212,11 +214,12 @@ You can <a href="%(url)s">change your preferences</a> at any time.
     security.declarePublic('get_available_formats')
     def get_available_formats(self):
         # we define a setter because in complex situation you can have "private" newsletter themes
-        return self.format_list
+        formats = []
+        for f in self._format_list:
+            formats.append(dict(id=f['id'], label=translate(f['label'], context=self.REQUEST)))
+        return formats
 
     def _edit(self, text, text_format=''):
-        """
-        """
         level = self._stx_level
         if not text_format:
             text_format = self.text_format

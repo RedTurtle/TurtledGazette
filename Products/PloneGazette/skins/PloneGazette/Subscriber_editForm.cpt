@@ -64,10 +64,10 @@
      <tal:block tal:repeat="available_format nltheme/get_available_formats">
        <input type="radio" class="noborder"
               name="format"
-              tal:attributes="checked python: test(format == available_format ,1, 0);
-                              id string:format-${available_format};
-                              value available_format;" />
-       <label tal:attributes="for string:format-${available_format}" tal:content="available_format">HTML</label><br />
+              tal:attributes="checked python: test(format == available_format['id'] ,1, 0);
+                              id string:format-${available_format/id};
+                              value available_format/id;" />
+       <label tal:attributes="for string:format-${available_format/id}" tal:content="available_format/label">HTML</label><br />
      </tal:block>
     
     </div>

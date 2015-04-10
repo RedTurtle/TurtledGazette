@@ -60,11 +60,11 @@ $Id: portlet_gazette.pt 50190 2007-09-25 17:24:18Z naro $
             <tal:block tal:condition="python:len(nl_objects) == 1"
                       tal:define="newsletter python:nl_objects[0]">
 
-             <tal:block tal:repeat="format newsletter/format_list">
+             <tal:block tal:repeat="format newsletter/get_available_formats">
                <input type="radio" name="format" class="noborder"
-                      tal:attributes="value format;
-                                      checked python:test(format == newsletter.default_format, 1, 0)" />
-               <span tal:omit-tag="" i18n:translate="" tal:content="format" /><br />
+                      tal:attributes="value format/id;
+                                      checked python:test(format['id'] == newsletter.default_format, 1, 0)" />
+               <span tal:omit-tag="" tal:content="format/label" /><br />
              </tal:block>
             </tal:block>
 

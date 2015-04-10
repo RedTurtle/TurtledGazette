@@ -138,14 +138,14 @@
 
   <div tal:define="default_format request/default_format | here/default_format">
 
-    <tal:block tal:repeat="format here/format_list">
+    <tal:block tal:repeat="format here/get_available_formats">
       <input type="radio"
              name="default_format"
-             tal:attributes="value format;
-                             id format;
+             tal:attributes="value format/id;
+                             id format/id;
                              checked python:test(default_format == format, 1, 0)" />
-       <label for="" tal:content="format"
-              tal:attributes="for format"
+       <label for="" tal:content="format/label"
+              tal:attributes="for format/id"
               i18n:translate="" /><br />
     </tal:block>
 
