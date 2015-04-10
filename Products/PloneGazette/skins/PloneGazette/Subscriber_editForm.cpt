@@ -61,7 +61,7 @@
        Select here a format for newsletters.
      </div>
     
-     <tal:block tal:repeat="available_format nltheme/format_list">
+     <tal:block tal:repeat="available_format nltheme/get_available_formats">
        <input type="radio" class="noborder"
               name="format"
               tal:attributes="checked python: test(format == available_format ,1, 0);

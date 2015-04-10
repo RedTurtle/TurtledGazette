@@ -209,6 +209,11 @@ You can <a href="%(url)s">change your preferences</a> at any time.
         self._initCatalog()
         return
 
+    security.declarePublic('get_available_formats')
+    def get_available_formats(self):
+        # we define a setter because in complex situation you can have "private" newsletter themes
+        return self.format_list
+
     def _edit(self, text, text_format=''):
         """
         """
@@ -554,13 +559,24 @@ You can <a href="%(url)s">change your preferences</a> at any time.
         """The subscriber clicked the Unsubscribe button
         """
         subscriber = self.getSubscriberById(subscriber_id)
+        mtool = getToolByName(self, 'portal_membership')
+        checkPermission = mtool.checkPermission
+        can_access_theme = checkPermission(permissions.View, self)
         newSecurityManager(REQUEST, ownerOfObject(self))
         if subscriber is not None:
             parent = subscriber.aq_parent
             parent.manage_delObjects([subscriber_id,])
 
         if REQUEST is not None:
-            REQUEST.RESPONSE.redirect(self.absolute_url() + '/NewsletterTheme_unsubscribed')
+            # Check if we have access to the newsletter theme
+            if can_access_theme:
+                REQUEST.RESPONSE.redirect(self.absolute_url() + '/NewsletterTheme_unsubscribed')
+            else:
+                portal_url = getToolByName(self, 'portal_url')()
+                plone_utils = getToolByName(self, 'plone_utils')
+                plone_utils.addPortalMessage(_('unsubscribe_success_message',
+                                               default=u"You have been successfully unsubscribed from this newsletter."))
+                REQUEST.RESPONSE.redirect(portal_url)
         return
 
     def checkMailAddress(self, mail):

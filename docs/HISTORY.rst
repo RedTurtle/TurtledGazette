@@ -8,6 +8,9 @@ HISTORY
   [keul]
 - Fixed utf-8 encoding issues when sending text/plain messages
   [keul]
+- Is now possible to behave "private" newsletter themes.
+  Subscribers will be able to unsubscribe from theme they can't reach
+  [keul]
 
 4.1.0 (2015-04-09)
 ==================
