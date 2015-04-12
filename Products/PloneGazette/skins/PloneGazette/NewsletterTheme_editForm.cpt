@@ -143,7 +143,7 @@
              name="default_format"
              tal:attributes="value format/id;
                              id format/id;
-                             checked python:test(default_format == format, 1, 0)" />
+                             checked python:test(default_format == format['id'], 1, 0)" />
        <label for="" tal:content="format/label"
               tal:attributes="for format/id"
               i18n:translate="" /><br />
