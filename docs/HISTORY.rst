@@ -4,7 +4,9 @@ HISTORY
 4.1.2 (unreleased)
 ==================
 
-- Nothing changed yet.
+- Fixed lot of encoding issues (you think that encoding in Python is a mess?
+  Try to send also mail...)
+  [keul]
 
 
 4.1.1 (2015-04-13)

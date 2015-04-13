@@ -446,8 +446,7 @@ class Newsletter(PortalContent, DefaultDublinCoreImpl, PNLContentBase):
         for index in reference_indexes:
             html = html[:index] + ' [' + str(n_reference) + '] ' + html[index:]
             n_reference = n_reference - 1
-        # TODO: fix this i18n issue
-        html = html + '\r\n-------------- %s --------------\r\n' % translate(_(u'References'), context=self.REQUEST)
+        html = html + '\r\n-------------- %s --------------\r\n' % translate(_(u'References'), context=self.REQUEST).encode('utf-8')
         for seq, url in enumerate(urls):
             html = html + '[' + str(seq + 1) + '] ' + url + '\r\n'
         # right now we don't send attachments in text/plain messages
@@ -456,7 +455,7 @@ class Newsletter(PortalContent, DefaultDublinCoreImpl, PNLContentBase):
             if theme.alternative_portal_url:
                 portal_url = getToolByName(self, 'portal_url')()
                 here_url.replace(portal_url, theme.alternative_portal_url, 1)
-            html = html + '\r\n-------------- %s --------------\r\n' % translate(_(u'Attachment'), context=self.REQUEST)
+            html = html + '\r\n-------------- %s --------------\r\n' % translate(_(u'Attachment'), context=self.REQUEST).encode('utf-8')
             html = html + '[' + self.absolute_url() + '/download_attachment\r\n'
         return html
 
@@ -495,7 +494,7 @@ class Newsletter(PortalContent, DefaultDublinCoreImpl, PNLContentBase):
                 # fixup URL references
                 text = lynx_file_url.sub('%(url)s', text)
         else:
-            text = transform_tool.convertToData('text/plain', html.encode('utf-8'))
+            text = transform_tool.convertToData('text/plain', html)
         #remove some garbage in the string
         text =  text.lstrip(' \n')
         if REQUEST is not None:
@@ -563,7 +562,7 @@ class Newsletter(PortalContent, DefaultDublinCoreImpl, PNLContentBase):
 
         mailMethod = theme.sendmail
 
-        titleForMessage = str(Header(safe_unicode(self.title), charset))
+        titleForMessage = Header(self.title, 'utf-8')
 
         portal_url = getToolByName(self, 'portal_url')()
         for mailTo, format, editurl in recipients:
@@ -623,7 +622,7 @@ class Newsletter(PortalContent, DefaultDublinCoreImpl, PNLContentBase):
                 mainMsg.epilogue="\n" # To ensure that message ends with newline
 
             try:
-                mailMethod(mailFrom, (mailTo,), mainMsg, subject = titleForMessage)
+                mailMethod(mailFrom, (mailTo,), mainMsg)
             except Exception:
                 errors.append(mailTo)
                 tbfile = cStringIO.StringIO()
