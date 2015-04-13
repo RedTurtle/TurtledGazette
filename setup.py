@@ -3,7 +3,7 @@ import os
 
 
 setup(name='TurtledGazette',
-      version='4.1.1.dev0',
+      version='4.1.1',
       description='A complete Newsletter product for Plone (an alternate version of Products.PloneGazette)',
       long_description=open("README.rst").read() + "\n" +
                        open(os.path.join("docs", "HISTORY.rst")).read(),
