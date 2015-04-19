@@ -3,6 +3,10 @@
  xmlns:browser="http://namespaces.zope.org/browser"
  i18n_domain="plonegazette">
 
+  <browser:resourceDirectory
+      name="plonegazette-static"
+      directory="static" />
+
   <browser:page
       for="..interfaces.INewsletterBTree"
       name="newsletterbtree_view"

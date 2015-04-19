@@ -1,0 +1,3 @@
+
+.icon-test:before { content: '\e800'; } /* '' */
+.icon-send:before { content: '\e801'; } /* '' */
