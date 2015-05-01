@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<metadata>
+  <version>1100</version>
+  <dependencies>
+    <dependency>profile-Products.ATContentTypes:base</dependency>
+    <dependency>profile-Products.PloneGazette:plonegazette</dependency>
+  </dependencies>
+</metadata>

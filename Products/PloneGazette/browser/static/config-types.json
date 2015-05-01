@@ -8,9 +8,27 @@
   "glyphs": [
     {
       "uid": "wg849ixsobykxshs6efpc6fk4m0fq8bh",
-      "css": "newslettertheme",
+      "css": "newsletter",
       "code": 59394,
       "src": "typicons"
+    },
+    {
+      "uid": "a1d4b614f12cfe2b5aa66313ad88c90c",
+      "css": "newsletterbtree",
+      "code": 59393,
+      "src": "typicons"
+    },
+    {
+      "uid": "uetwmlvm6z9eaot1t74vvsgrte9vwi0n",
+      "css": "newslettertheme",
+      "code": 59392,
+      "src": "modernpics"
+    },
+    {
+      "uid": "56a0672588820ab1a16363e5d07dd22e",
+      "css": "subscriber",
+      "code": 59395,
+      "src": "linecons"
     }
   ]
 }

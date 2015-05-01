@@ -34,7 +34,7 @@
     visible="True" i18n:domain="plone" i18n:attributes="title">
   <permission value="PNL Change Newsletter Theme"/>
  </action>
- <action title="Import" action_id="NewsletterTheme_importForm"
+ <action title="Import" action_id="import"
     category="object" condition_expr=""
     url_expr="string:${object_url}/NewsletterTheme_importForm" visible="True"
 	i18n:domain="plone" i18n:attributes="title">

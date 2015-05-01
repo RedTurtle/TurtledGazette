@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<object name="portal_css">
+  <stylesheet
+      id="++resource++plonegazette-static/css/plonegazette.css"
+      enabled="1"
+      expression=""
+      cookable="True"
+      media="all"
+      rel="stylesheet"
+      rendering="link" />
+  <stylesheet
+      id="++resource++plonegazette-static/css/types.css"
+      enabled="1"
+      expression=""
+      cookable="True"
+      media="all"
+      rel="stylesheet"
+      rendering="link" />
+</object>

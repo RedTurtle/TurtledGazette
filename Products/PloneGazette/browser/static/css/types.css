@@ -1,10 +1,10 @@
 @font-face {
   font-family: 'types';
-  src: url('../font/types.eot?56415291');
-  src: url('../font/types.eot?56415291#iefix') format('embedded-opentype'),
-       url('../font/types.woff?56415291') format('woff'),
-       url('../font/types.ttf?56415291') format('truetype'),
-       url('../font/types.svg?56415291#types') format('svg');
+  src: url('../++resource++plonegazette-static/font/types.eot?8399425');
+  src: url('../++resource++plonegazette-static/font/types.eot?8399425#iefix') format('embedded-opentype'),
+       url('../++resource++plonegazette-static/font/types.woff?8399425') format('woff'),
+       url('../++resource++plonegazette-static/font/types.ttf?8399425') format('truetype'),
+       url('../++resource++plonegazette-static/font/types.svg?8399425#types') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -14,22 +14,26 @@
 @media screen and (-webkit-min-device-pixel-ratio:0) {
   @font-face {
     font-family: 'types';
-    src: url('../font/types.svg?56415291#types') format('svg');
+    src: url('../++resource++plonegazette-static/font/types.svg?8399425#types') format('svg');
   }
 }
 */
  
- body#visual-portal-wrapper.pat-plone #edit-zone nav [class="contenttype-newslettertheme"]::after {
+body#visual-portal-wrapper.pat-plone #edit-zone #plone-contentmenu-factories [class^="contenttype-newsletter"]:after,
+body#visual-portal-wrapper.pat-plone #edit-zone #plone-contentmenu-factories [class*=" contenttype-newsletter"]:after,
+body#visual-portal-wrapper.pat-plone #edit-zone #plone-contentmenu-factories [class^="contenttype-subscriber"]:after,
+body#visual-portal-wrapper.pat-plone #edit-zone #plone-contentmenu-factories [class*=" contenttype-subscriber"]:after,
+body#visual-portal-wrapper.pat-plone .outer-wrapper.outer-wrapper [class^="contenttype-newsletter"]:before,
+body#visual-portal-wrapper.pat-plone .outer-wrapper.outer-wrapper [class*=" contenttype-newsletter"]:before,
+body#visual-portal-wrapper.pat-plone .outer-wrapper.outer-wrapper [class^="contenttype-subscriber"]:before,
+body#visual-portal-wrapper.pat-plone .outer-wrapper.outer-wrapper [class*="contenttype-subscriber"]:before
+{
   font-family: "types";
   font-style: normal;
   font-weight: normal;
   speak: none;
  
-  display: inline-block;
   text-decoration: inherit;
-  width: 1em;
-  margin-right: .2em;
-  text-align: center;
   /* opacity: .8; */
  
   /* For safety - reset parent styles, that can break glyph codes*/
@@ -38,14 +42,7 @@
  
   /* fix buttons height, for twitter bootstrap */
   line-height: 1em;
- 
-  /* Animation center compensation - margins should be symmetric */
-  /* remove if not needed */
-  margin-left: .2em;
- 
-  /* you can be more comfortable with increased icons size */
-  /* font-size: 120%; */
- 
+  
   /* Font smoothing. That was taken from TWBS */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -54,4 +51,11 @@
   /* text-shadow: 1px 1px 1px rgba(127, 127, 127, 0.3); */
 }
  
-body#visual-portal-wrapper.pat-plone #edit-zone nav .contenttype-newslettertheme::after { content: '\e802'; } /* '' */
+body#visual-portal-wrapper.pat-plone #edit-zone #plone-contentmenu-factories .contenttype-newslettertheme:after,
+body#visual-portal-wrapper.pat-plone .outer-wrapper .contenttype-newslettertheme:before { content: '\e800'; } /* '' */
+body#visual-portal-wrapper.pat-plone #edit-zone #plone-contentmenu-factories .contenttype-newsletterbtree:after,
+body#visual-portal-wrapper.pat-plone .outer-wrapper .contenttype-newsletterbtree:before { content: '\e801'; } /* '' */
+body#visual-portal-wrapper.pat-plone #edit-zone #plone-contentmenu-factories .contenttype-newsletter:after,
+body#visual-portal-wrapper.pat-plone .outer-wrapper .contenttype-newsletter:before { content: '\e802'; } /* '' */
+body#visual-portal-wrapper.pat-plone #edit-zone #plone-contentmenu-factories .contenttype-subscriber:after,
+body#visual-portal-wrapper.pat-plone .outer-wrapper .contenttype-subscriber:before, { content: '\e803'; } /* '' */

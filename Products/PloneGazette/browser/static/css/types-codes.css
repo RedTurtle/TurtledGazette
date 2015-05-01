@@ -1,2 +1,5 @@
 
-.contenttype-newslettertheme:before { content: '\e802'; } /* '' */
+.contenttype-newslettertheme:before { content: '\e800'; } /* '' */
+.contenttype-newsletterbtree:before { content: '\e801'; } /* '' */
+.contenttype-newsletter:before { content: '\e802'; } /* '' */
+.contenttype-subscriber:before { content: '\e803'; } /* '' */
