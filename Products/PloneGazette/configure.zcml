@@ -8,7 +8,8 @@
    i18n_domain="plonegazette">
 
   <i18n:registerTranslations directory="locales" />
-  
+
+  <include package="Products.CMFPlone" />
   <include package=".browser" />
 
   <include zcml:condition="installed plone.app.discussion" file="adapters.zcml"/>

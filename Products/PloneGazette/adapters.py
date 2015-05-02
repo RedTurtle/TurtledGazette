@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+
 class NewsletterConversation(object):
     """Fake support for commenting in Plone, beating the plone.app.discussion incompatibility"""
 

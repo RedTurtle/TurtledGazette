@@ -1,13 +1,15 @@
-from zope.interface import implements
+# -*- coding: utf8 -*-
 
+from AccessControl import ClassSecurityInfo
+from PNLBase import PNLContentBase
+from PNLPermissions import *
 from Products.Archetypes.atapi import BaseBTreeFolder, BaseBTreeFolderSchema
 from Products.Archetypes.atapi import registerType
-from AccessControl import ClassSecurityInfo
-from PNLPermissions import *
-from PNLBase import PNLContentBase
 from Products.CMFCore.permissions import ListFolderContents
-from Products.PloneGazette.interfaces import INewsletterBTree
 from Products.PloneGazette import config
+from Products.PloneGazette.interfaces import INewsletterBTree
+from zope.interface import implements
+
 
 class NewsletterBTree(BaseBTreeFolder, PNLContentBase):
     implements(INewsletterBTree)
@@ -52,5 +54,4 @@ class NewsletterBTree(BaseBTreeFolder, PNLContentBase):
         
 
 registerType(NewsletterBTree, config.PROJECTNAME)
-
 

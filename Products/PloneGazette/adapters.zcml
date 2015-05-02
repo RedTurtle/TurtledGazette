@@ -1,5 +1,6 @@
 <configure
-    xmlns="http://namespaces.zope.org/zope">
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:zcml="http://namespaces.zope.org/zcml">
 
   <adapter
       for="Products.PloneGazette.interfaces.INewsletterTheme"
@@ -17,6 +18,13 @@
       for="Products.PloneGazette.interfaces.ISubscriber"
       factory=".adapters.NewsletterConversation"
       provides="plone.app.discussion.interfaces.IConversation"
+      />
+
+  <adapter
+      zcml:condition="installed Products.CMFPlone.interfaces.language"
+      for=".interfaces.IPNLBase"
+      provides="Products.CMFPlone.interfaces.ILanguage"
+      factory=".language.PNLLanguage"
       />
 
 </configure>

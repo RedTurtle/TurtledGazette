@@ -1,15 +1,16 @@
 # -*- coding: utf-8 -*-
 
-# Zope core import
 from Globals import InitializeClass
 from AccessControl import ClassSecurityInfo
-
-# CMF/Plone imports
 from Products.CMFCore.utils import getToolByName
+from Products.PloneGazette.interfaces import IPNLBase
+from zope.interface import implements
+
 
 class PNLContentBase(object):
     """Shared by all that's in a NewsletterCentral
     """
+    implements(IPNLBase)
     security = ClassSecurityInfo()
 
     security.declarePublic('getTheme')
