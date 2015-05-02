@@ -17,6 +17,18 @@
       "css": "test",
       "code": 59392,
       "src": "entypo"
+    },
+    {
+      "uid": "6364d85e960f23b9a843a506387e7970",
+      "css": "infos",
+      "code": 59394,
+      "src": "typicons"
+    },
+    {
+      "uid": "9367acef93427f6301ee8ab42d45def7",
+      "css": "import",
+      "code": 59395,
+      "src": "typicons"
     }
   ]
 }

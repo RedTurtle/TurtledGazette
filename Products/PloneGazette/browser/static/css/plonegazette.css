@@ -1,10 +1,10 @@
 @font-face {
   font-family: 'plonegazette';
-  src: url('../++resource++plonegazette-static/font/plonegazette.eot?61343191');
-  src: url('../++resource++plonegazette-static/font/plonegazette.eot?61343191#iefix') format('embedded-opentype'),
-       url('../++resource++plonegazette-static/font/plonegazette.woff?61343191') format('woff'),
-       url('../++resource++plonegazette-static/font/plonegazette.ttf?61343191') format('truetype'),
-       url('../++resource++plonegazette-static/font/plonegazette.svg?61343191#plonegazette') format('svg');
+  src: url('../++resource++plonegazette-static/font/plonegazette.eot?87063620');
+  src: url('../++resource++plonegazette-static/font/plonegazette.eot?87063620#iefix') format('embedded-opentype'),
+       url('../++resource++plonegazette-static/font/plonegazette.woff?87063620') format('woff'),
+       url('../++resource++plonegazette-static/font/plonegazette.ttf?87063620') format('truetype'),
+       url('../++resource++plonegazette-static/font/plonegazette.svg?87063620#plonegazette') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -18,9 +18,11 @@
   }
 }
 */
- 
- [class^="icon-test"]:before, [class^="icon-send"]:before,
- [class*=" icon-test"]:before, [class*=" icon-send"]:before {
+
+[class^="icon-test"]:before, [class^="icon-send"]:before,
+[class^="icon-infos"]:before, [class^="icon-import"]:before,
+[class*=" icon-test"]:before, [class*=" icon-send"]:before,
+[class*=" icon-infos"]:before, [class*=" icon-import"]:before {
   font-family: "plonegazette";
  
   /* Font smoothing. That was taken from TWBS */
@@ -30,6 +32,8 @@
   /* Uncomment for 3D effect */
   /* text-shadow: 1px 1px 1px rgba(127, 127, 127, 0.3); */
 }
- 
+
 .icon-test:before { content: '\e800'; } /* '' */
 .icon-send:before { content: '\e801'; } /* '' */
+.icon-infos:before { content: '\e802'; } /* '' */
+.icon-import:before { content: '\e803'; } /* '' */
