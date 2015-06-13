@@ -15,4 +15,10 @@
       allowed_interface=".interfaces.INewsletterBTreeView"
       permission="zope2.View" />
 
+  <browser:page
+      for="..interfaces.INewsletter"
+      name="tinymcepgconf"
+      class=".tinymce_conf.TinyMCEConfView"
+      permission="zope2.View" />
+
 </configure>
