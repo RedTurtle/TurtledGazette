@@ -3,6 +3,7 @@
 from AccessControl import ClassSecurityInfo
 from PNLBase import PNLContentBase
 from PNLPermissions import *
+from Products.CMFCore.interfaces import IFolderish
 from Products.Archetypes.atapi import BaseBTreeFolder, BaseBTreeFolderSchema
 from Products.Archetypes.atapi import registerType
 from Products.CMFCore.permissions import ListFolderContents
@@ -12,7 +13,7 @@ from zope.interface import implements
 
 
 class NewsletterBTree(BaseBTreeFolder, PNLContentBase):
-    implements(INewsletterBTree)
+    implements(INewsletterBTree, IFolderish)
     
     portal_type = meta_type = 'NewsletterBTree' 
     archetype_name = 'Newsletter Large Folder'   #this name appears in the 'add' box
@@ -54,4 +55,3 @@ class NewsletterBTree(BaseBTreeFolder, PNLContentBase):
         
 
 registerType(NewsletterBTree, config.PROJECTNAME)
-

@@ -226,9 +226,9 @@ You can <a href="%(url)s">change your preferences</a> at any time.
 
         if self.text_format:
             self.text_format = text_format
-        if text_format == 'html':
+        if text_format == 'html' or text_format == 'text/html':
             self.text = self.cooked_text = text
-        elif text_format == 'plain':
+        elif text_format == 'plain' or text_format == 'text/plain':
             self.text = text
             self.cooked_text = html_quote(text).replace('\n', '<br />')
         else:
@@ -284,7 +284,7 @@ You can <a href="%(url)s">change your preferences</a> at any time.
     def CookedBody(self, stx_level=None, setLevel=0):
         """
         """
-        if (self.text_format == 'html' or self.text_format == 'plain'
+        if (self.text_format.endswith('html') or self.text_format.endswith('plain')
             or (stx_level is None)
             or (stx_level == self._stx_level)):
             return self.cooked_text

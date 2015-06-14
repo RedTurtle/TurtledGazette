@@ -16,8 +16,9 @@
       permission="zope2.View" />
 
   <browser:page
-      for="..interfaces.INewsletter"
+      for="*"
       name="tinymcepgconf"
+      allowed_interface=".tinymce_conf.ITinyMCEConfView"
       class=".tinymce_conf.TinyMCEConfView"
       permission="zope2.View" />
 

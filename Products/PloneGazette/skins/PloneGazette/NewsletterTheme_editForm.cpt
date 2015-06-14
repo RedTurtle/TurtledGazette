@@ -7,6 +7,7 @@
 <div metal:fill-slot="main"
      tal:define="errors options/state/getErrors;
                  member context/@@plone_portal_state/member;
+                 tinymcepgconf nocall:context/@@tinymcepgconf;
                  ">
 
  <h1 i18n:translate="heading_newsletter_theme_edit">Edit newsletter theme</h1>
@@ -111,12 +112,23 @@
                      inputvalue text;
                      cooked_inputvalue cooked_text;">
 
-    <div metal:use-macro="here/wysiwyg_support/macros/wysiwygEditorBox">
-     The WYSIWYG code
-    </div>
-
+        <div metal:use-macro="here/wysiwyg_support/macros/wysiwygEditorBox">
+         The WYSIWYG code
+        </div>
     </tal:editor>
-    <tal:bbb define="text_format text_format|string:html">
+
+     <select
+        tal:condition="tinymcepgconf/mockup_available"
+        tal:define="text_format text_format|string:html"
+        name="text_format"
+        class="pat-textareamimetypeselector"
+        tal:attributes="data-pat-textareamimetypeselector tinymcepgconf/configuration">
+      <option value="text/html" tal:attributes="selected python:text_format=='html'">text/html</option>
+      <option value="text/plain" tal:attributes="selected python:text_format=='plain'">text/plain</option>
+    </select>
+
+    <tal:bbb define="text_format text_format|string:html"
+             condition="not:tinymcepgconf/mockup_available">
       <div metal:use-macro="here/wysiwyg_support/macros/textFormatSelector">
         Format box, if needed
       </div>
