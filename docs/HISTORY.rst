@@ -1,9 +1,11 @@
 HISTORY
 =======
 
-4.1.2 (unreleased)
+4.2.0 (unreleased)
 ==================
 
+- Plone 5 compatibility
+  [keul]
 - Fixed lot of encoding issues (you think that encoding in Python is a mess?
   Try to send also mail...)
   [keul]
